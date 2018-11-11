@@ -1,0 +1,57 @@
+@import url("widget-style.css");
+.blank{
+	margin: 50px 0 20px 0 ;
+	display: flex;
+	justify-content: center;
+}
+.form{
+	width: 100%;
+	margin: 40px auto;
+	max-width: 333px;
+	min-width: 200px;
+
+}
+.login_input{
+	color: #000;
+	font-weight: 300;
+	font-size: 16px;
+	line-height: 50px;
+	background-color: #fff;
+	padding: 1px 0 0 6px;
+	/*margin-bottom: 10px;*/
+	width: 100%;
+	min-width: 300px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	border: 0px solid transparent;
+	border-bottom: 1px solid #000;
+}
+.input-container{
+	margin: 0 10px 20px;
+	position: relative;
+}
+.label{
+	position: absolute;
+	pointer-events: none;
+	left: 5px;
+	font-size: 20px;
+	color: #767676FF;
+	top: 0;
+	line-height: 40px;
+	transition: .3s;
+	padding-top: 12px;
+}
+.login_input:focus{
+	box-shadow: 0 0 2px 1px #000;
+	border-radius: 5px 5px 0 0;  
+}
+.login_input:focus~.label,
+.login_input:not(:focus):valid~.label {
+  top: -22px;
+  font-size: 10px;
+}
+.btn-login{
+	width: 100%;
+	margin-bottom: 32px;
+}

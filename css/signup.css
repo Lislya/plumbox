@@ -1,0 +1,104 @@
+.form-signup{
+  width: 100%;
+  margin: 20px auto;
+  max-width: 700px;
+  min-width: 460px;
+}
+.form-container{
+	min-width: 460px;
+	width: 100%;
+	margin: 0 auto;
+	padding: 0 30px;
+	display: flex;
+	flex-wrap: wrap;
+	box-sizing: border-box;
+}
+.form-item{
+	margin: 0 10px 20px;
+	flex: 1 1 calc(50% - 20px);
+	position: relative;
+}
+.addr_input{
+	min-width: 460px;
+	width: 700px;
+	margin: auto;
+	display: none;
+	flex-wrap: wrap;
+	transition-property: all;
+	transition-duration: 3s;
+}
+
+.form-item_addr{
+	margin: 0 10px 20px;
+	flex: 1 1 calc(33.33% - 20px);
+}
+.signup-input{
+	color: #000;
+	font-weight: 300;
+	font-size: 16px;
+	line-height: 28px;
+	background-color: #fff;
+	padding: 1px 0 0 6px;
+	padding-top: 20px;
+	margin-bottom: 10px;
+	width: 100%;	
+	box-sizing: border-box;
+	border: 0px solid transparent;
+	border-bottom: 1px solid #000;
+}
+.signup-label {
+  	position: absolute;
+ 	pointer-events: none;
+  	left: 5px;
+  	font-size: 16px;
+  	color: #767676FF;
+  	top: 0;
+  	line-height: 28px;
+  	transition: .3s;
+  	padding-top: 12px;
+  }
+.signup-input:focus{
+	border-radius: 5px 5px 0 0;
+	box-shadow: 0 0 2px 1px #A600FFFF;
+}
+.signup-input:focus~.signup-label,
+.signup-input:not(:focus):valid~.signup-label {
+  top: -10px;
+  font-size: 9px;
+}
+.button-signup{
+	float: left;
+	width: 100%;
+	border: 1px solid transparent;
+	cursor: pointer;
+	background-color: #000;
+	color: #fff;
+	font-size: 18px;
+	padding: 14px 14px;
+	margin-top: -4px;
+	font-weight: 300;
+	transition: all .3s;
+}
+.button-signup:hover{
+	background-color: #fff;
+	color: #000;
+	border: 1px solid #000;
+}
+.wrapper{
+	width: 0;
+	height: 74px;
+	background-color: #fbfbfb;
+}
+.blank{
+	margin: 40px 0 auto;
+	display: flex;
+	justify-content: center;
+}
+.checkbox{
+	padding-left: 10px;
+	padding-bottom: 20px;
+}
+.alert_username{
+	border: none;
+	margin-bottom: 0px;
+}
