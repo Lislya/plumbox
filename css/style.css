@@ -90,58 +90,11 @@ nav{
 	text-decoration: none;
 }
 
-/*slider style*/
-.slider{
-	width: 100%;
+.fotorama{
 	display: flex;
 	justify-content: center;
-	margin-top: auto;
-	background-color: #fff;
-	box-sizing: border-box;
-}
-.arrow{
-	display: block;
-	height: 30px;
-	width: 30px;
-	cursor: pointer;
-}
-.slide{
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	width: 4%;
-}
-.slide:hover{
-	background-color: #EDEDEDFF;
 }
 
-.img{
-	width: 96%;
-	text-align: center;
-	line-height: 300px;
-	color: #fff;
-	display: none;
-}
-.img.current{
-	/*width: 96%;*/
-	display: block;
-}
-.img:first-child{
-	width: 96%;
-}
-.img:nth-child(2){
-	width: 96%;
-}
-.img:nth-child(3){
-	width: 96%;
-}
-.img:nth-child(4){
-	width: 96%;
-}
-.img:nth-child(5){
-	width: 96%;
-}
 .slot_container{
 	display:flex;
 	justify-content: center;
