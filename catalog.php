@@ -14,10 +14,11 @@
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 	<!-- Include jQuery lib -->
 	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
 </head>
 <body>
 	<!-- Connect to DB -->
-    <?php require ('function/connect.php') ?>
+    <?php require_once ('function/connect.php') ?>
 	<header>
 		<div class="logo">
 			<a href="index.php"><img src="img/logo.png" alt="PlumBox" class="graphic_logo"></a>
@@ -25,7 +26,7 @@
 		<!-- Navigation bar -->
 		<nav>
 			<div class="navbar">
-				<div class="navbar-left"><a href="#"><img src="img/icon/cart.png" alt="cart"></a></div>
+				<div class="navbar-left"><a href="cart.php"><img src="img/icon/cart.png" alt="cart"></a></div>
 				<div class="navbar-center">
 					<a href="index.php">HOME</a>
 					<a href="catalog.php">CATALOG</a>
@@ -50,10 +51,11 @@
 	</header>
 
 	<main>
+        <div class="mini-cart"></div>
 		<!-- grid setting -->
 		<div class="container">
 			<div class="row">
-				<!-- right navbar of catalog -->
+				<!-- left navbar of catalog || categories -->
 				<div class="col-sm">
 					<ul class="catalog">
 						<li value="1">
@@ -116,7 +118,7 @@
 					</ul>
 				</div>
 				<div class="col-9">
-		<!-- shop slots \ ajax-method -->
+		<!-- shop slots \ ajax-method \ catalog.js file -->
 					<div class="slot_container">
 						<div class="slot">
                             <!-- SLOT ITEM EXAMPLE -->
@@ -128,7 +130,60 @@
 							<div class="add_to_cart"><button class="button">BUY</button></div>
 						</div> -->
 
-                            <?php echo $_GET['product_id'] ?>
+                           <!--  INFROMATION ABOUT A PRODUCT -->
+                        <?php
+                        if(isset($_GET['product_id'])){
+                            $name ='';
+                            $desc = '';
+                            $price = 0;
+                            $id_ctg = 0;
+                            $product_id = (int) $_GET['product_id'];
+                            $sql = "SELECT * FROM product WHERE id_product='$product_id'";
+                            if($result_set = $connection->query($sql)){
+                                $row = $result_set->fetch_assoc();
+                                $name = $row['name_product'];
+                                $desc = $row['description'];
+                                $price = $row['price_s'];
+                                $id_ctg = $row['id_category'];
+                                $img=array();
+                            } $result_set->free();
+                            $sql = "SELECT name_ctg FROM category WHERE id_category='$id_ctg'";
+                            if ($result_set = $connection->query($sql)){
+                                $row = $result_set->fetch_assoc();
+                                $ctg = $row['name_ctg'];
+                            } $result_set->free();
+                            $sql = "SELECT id_img FROM product_img WHERE id_product='$product_id'";
+                            if($result_set = $connection->query($sql)){
+                                while($row = $result_set->fetch_assoc()){
+                                    $id_img = $row['id_img'];
+                                    $sql = "SELECT name_img FROM image WHERE id_img="."$id_img";
+                                    if($result_set1 = $connection->query($sql)){
+                                        while ($rows = $result_set1->fetch_assoc()){
+                                            $img[] = $rows['name_img'];
+                                        }
+                                    } $result_set1->free();
+                                }
+                            } $result_set->free();
+                            echo
+                            '<div class="col-5">
+							    <h2>'.$name.'</h2>
+							    <div class="fotorama">
+  								    <img src="img/products/'.$ctg.'/'.$img[0].'">
+  								    <img src="img/products/'.$ctg.'/'.$img[1].'">
+  								    <img src="img/products/'.$ctg.'/'.$img[2].'">
+							    </div>
+						    </div>';
+                            echo
+                            '<div class="col-7">
+							<h3>Description:</h3>
+							<p>'.$desc.'</p>
+							<p class="price">Price: '.$price.' &#8381</p>
+							<div class="add_to_cart"><button class="button">BUY</button></div>
+						    </div>';
+                        }
+                        $connection->close();
+                        ?>
+
 
 						</div>
 					</div>
@@ -147,7 +202,6 @@
             <li><a href="https://www.twitter.com"><i class="fa fa-twitter" aria-hidden="true"></i></a> </li>  
              <li><a href="https://www.ru.linkedin.com"><i class="fa fa-linkedin" aria-hidden="true"></i></a> </li>  
         </ul>
-        </ul>
     	</div>
     	<!-- Copyright -->
     	<div id="rights">
@@ -155,6 +209,7 @@
     	</div>
 	</footer>
 	<script type="text/javascript" src="js/catalog.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
 </body>
 </html>
 
