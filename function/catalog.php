@@ -2,19 +2,6 @@
 //connect to DB
 require_once ('connect.php');
 //$_REQUEST['category']=1;
-//implement JsonSerializable interface
-class Json implements JsonSerializable{
-    private $array;
-    public function __construct(array $arr)
-    {
-        $this->array = $arr;
-    }
-    public function jsonSerialize()
-    {
-        return $this->array;
-        // TODO: Implement jsonSerialize() method.
-    }
-}
 //Product class
 class Product{
     private $name,$vendor, $quantity, $price_s,$img=array(),$cat;
@@ -97,7 +84,7 @@ if(isset($_REQUEST['category']))
         } $result_set->free();
 
     }
-    echo json_encode(new Json($list),JSON_NUMERIC_CHECK|JSON_UNESCAPED_UNICODE);
+    echo json_encode($list,JSON_NUMERIC_CHECK|JSON_UNESCAPED_UNICODE);
 }
 $connection->close();
 
