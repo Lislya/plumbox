@@ -11,21 +11,32 @@ function isJsonString(str) {
     return true;
 }
 
+function isEmpty(object) {
+    for (var key in object)
+        if (object.hasOwnProperty(key)) return true;
+    return false;
+}
+
 function showCart(data) {
     //html output of the Main cart
-    if(data){
-        var out = '';
-        if (isJsonString(data)){
-            var cart = JSON.parse(data);
-        }
-        for (var id in cart){
-            out += '<p>Name: '+cart[id].name+'</p>';
-            out += '<img src="img/products/' + cart[id].img + '">';
-            out += '<p>Num: ' + cart[id].num + '</p>';
-            out += '<p>Price: ' + cart[id].price + '</p>';
-
-        }
+    if (isEmpty(mainCart)){
+        var out='';
+        out += '<div class="alert alert-danger" role="alert">Cart is empty</div>';
         $('.cart').html(out);
+    } else {
+        if (data) {
+            var out = '';
+            if (isJsonString(data)) {
+                mainCart = JSON.parse(data);
+            }
+            for (var id in mainCart) {
+                out += '<p>Name: ' + mainCart[id].name + '</p>';
+                out += '<img src="img/products/' + mainCart[id].img + '">';
+                out += '<p>Num: ' + mainCart[id].num + '</p>';
+                out += '<p>Price: ' + mainCart[id].price + '</p>';
+            }
+            $('.cart').html(out);
+        }
     }
 }
 
