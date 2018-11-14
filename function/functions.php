@@ -1,19 +1,4 @@
 <?php
-
-function connect(){
-    //connection function
-    $conn = new mysqli('localhost','root','','plumbox');
-    $conn->set_charset('utf-8');
-    if ($conn->connect_error){
-        die('Connect Error (' . $conn->connect_errno . ') ' . $conn->connect_error);
-    }
-    return $conn;
-}
-
-function category($cat){
-    //category product output
-    $conn = connect();
-    //Product class
 class Product{
     private $name,$vendor, $quantity, $price_s,$img=array(),$cat;
     public function getName(){
@@ -31,9 +16,15 @@ class Product{
     public function getQ() {
         return $this->quantity;
     }
+    public function getCtg(){
+        return $this->cat;
+    }
     public function setImg($img)
     {
         $this->img[]=$img;
+    }
+    public function setCtg($ctg){
+        $this->cat = $ctg;
     }
     public function prodSet($n,$v,$p,$c,$q){
         $this->name = $n;
@@ -43,6 +34,22 @@ class Product{
         $this->quantity=$q;
     }
 }
+
+function connect(){
+    //connection function
+    $conn = new mysqli('localhost','root','','plumbox');
+    $conn->set_charset('utf-8');
+    if ($conn->connect_error){
+        die('Connect Error (' . $conn->connect_errno . ') ' . $conn->connect_error);
+    }
+    session_start();
+    return $conn;
+}
+
+function category($cat){
+    //category product output
+    $conn = connect();
+    //Product class
 
 if(isset($cat))
 {
@@ -99,6 +106,7 @@ if(isset($cat))
 }
 
 function loadCartGoods($json){
+    //loading goods to cart.php
     $conn = connect();
     $cart = json_decode($json,true);
     if (json_last_error() === JSON_ERROR_NONE){
@@ -112,5 +120,54 @@ function loadCartGoods($json){
         }
         echo json_encode($cart,JSON_NUMERIC_CHECK|JSON_UNESCAPED_UNICODE);
     } else die("It's not JSON format");
+}
 
+function getSession(){
+    // get username from global SESSION array
+    $conn = connect();
+    echo $_SESSION['username'];
+}
+
+function randomProd($id){
+    $conn = connect();
+
+    $list = array(); //array for json file
+
+        //get info about random slot in index.php
+        $product = new Product(); //initialize one slot
+        //prepare sql query
+        $sql = "SELECT * FROM product WHERE id_product='$id'";
+        if ($result_set = $conn->query($sql)) {
+            $row = $result_set->fetch_assoc();
+            $product->prodSet($row['name_product'], $row['vendor_code'], $row['price_s'], $row['id_category'], $row['quantity']);
+        }
+        $result_set->free();
+        //get images id
+        $sql = "SELECT id_img FROM product_img WHERE id_product = '$id'";
+        if ($result_set = $conn->query($sql)) {
+            while ($rows = $result_set->fetch_assoc()) {
+                $id_img = $rows['id_img'];
+
+                //get image name
+                $sql = "SELECT name_img FROM image WHERE id_img = '$id_img'";
+                if ($result_set1 = $conn->query($sql)){
+                    $row = $result_set1->fetch_assoc();
+                    $product->setImg($row['name_img']);
+                } $result_set1->free();
+            } $result_set->free();
+        }
+        //get category name
+        $id_ctg = $product->getCtg();
+        $sql = "SELECT name_ctg FROM category WHERE id_category = '$id_ctg'";
+        if ($result_set = $conn->query($sql)){
+            $row = $result_set->fetch_assoc();
+            $product->setCtg($row['name_ctg']);
+        } $result_set->free();
+
+        //setting list array
+        $list[$id]['name'] = $product->getName();
+        $list[$id]['price'] = $product->getP();
+        $list[$id]['category'] = $product->getCtg();
+        $list[$id]['img'] = $product->getImg();
+    echo json_encode($list,JSON_NUMERIC_CHECK|JSON_UNESCAPED_UNICODE);
 }

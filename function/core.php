@@ -13,4 +13,12 @@ $action = $_REQUEST['action'];
              loadCartGoods($_REQUEST['json']);
          } else die('No JSON-data');
          break;
+     case 'getSession':
+         getSession();
+         break;
+     case 'randomProd':
+         if(isset($_REQUEST['id'])){
+             randomProd($_REQUEST['id']);
+         } else die ('No product id');
+         break;
  }

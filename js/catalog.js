@@ -1,4 +1,5 @@
 var cart = {}; // cart object
+var count = 0;
 
 function prodOut(data) {
 	//CATEGORY PRODUCT OUTPUT
@@ -23,29 +24,30 @@ function addToCart() {
 	var id = $(this).attr('data-id');
 	var name = $(this).attr('data-name');
 	var img = $(this).attr('data-img');
-	if(cart[id]==undefined){
+	if(cart[id]===undefined){
 		cart[id]={};
 		cart[id]['name'] = name;
 		cart[id]['img'] = img;
 		cart[id]['num'] = 1;
+		count++;
 	} else {
 		cart[id]['num']++;
+        count++;
 	}
-	console.log(cart);
-	showMiniCart();
 	saveMiniCart();
-}
-function showMiniCart() {
-	var out = '';
-	for (var key in cart){
-		out += cart[key].name + '---' + cart[key].num+'<br>';
-	}
-	$('.mini-cart').html(out);
+    if (count>0){
+        addWidget();
+    }
 }
 
 function saveMiniCart(){
 	//saving mini-cart
 	localStorage.setItem('cart',JSON.stringify(cart));
+	localStorage.setItem('count',count);
+}
+
+function addWidget(){
+	$('#cart-widget').addClass('cart-widget').html(localStorage.getItem('count'));
 }
 
 function loadMiniCart(){
@@ -55,7 +57,10 @@ function loadMiniCart(){
 		//show local storage mini-cart
 		if(isJsonString(localStorage.getItem('cart'))){
 			cart = JSON.parse(localStorage.getItem('cart'));
-			showMiniCart();
+			count = localStorage.getItem('count');
+			if(count>0) {
+                addWidget();
+            }
 		}
 	}
 }

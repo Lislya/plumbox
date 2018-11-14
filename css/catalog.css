@@ -20,6 +20,9 @@
 	border-left: 1px solid #fff;
 	width: 310px;
 }
+.catalog li:last-child{
+	margin-bottom: 10px;
+}
 .catalog li a{
 	font-weight: 300;
 	text-align: center;

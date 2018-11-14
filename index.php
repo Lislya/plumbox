@@ -8,10 +8,10 @@
 	<!-- Include Raleway font -->
 	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 	<!-- Include Bootstrap-icon pack for social -->
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 	<!-- Include jQuery lib -->
-	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/libs/jquery-3.3.1.min.js"></script>
 	<link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
 </head>
 <body>
@@ -24,13 +24,13 @@
 		<!-- Navigation bar -->
 		<nav>
 			<div class="navbar">
-				<div class="navbar-left"><a href="cart.php"><img src="img/icon/cart.png" alt="cart"></a></div>
+				<div class="navbar-left"><a href="cart.php"><img src="img/icon/cart.png" alt="cart"></a> <span id="cart-widget"></span></div>
 				<div class="navbar-center">
 					<a href="index.php">HOME</a>
 					<a href="catalog.php">CATALOG</a>
-					<a href="shop.html">SHOPS</a>
-					<a href="offer.html">SPECIAL OFFERS</a>
-					<a href="about.html">ABOUT US</a>
+					<a href="shop.php">SHOPS</a>
+					<a href="offer.php">SPECIAL OFFERS</a>
+					<a href="about.php">ABOUT US</a>
 				</div>
 				<div class="navbar-right">
                     <?php if(isset($_SESSION['username'])) : ?>
@@ -58,43 +58,13 @@
 		<!-- shop slots * 6 -->
 		<div class="slot_container">
 			<div class="slot">
-				<div class="slot_item">
-					<a href="catalog.php?product_id=14"><img src="img/products/pc/14_1.jpg" alt=""></a>
-					<h3>Lorem ipsum dolor sit amet.</h3>
-					<p class="price">1000$</p>
-					<div class="add_to_cart"><button class="button">BUY</button></div>
-				</div>
-				<div class="slot_item">
-					<a href="catalog.php?product_id=31"><img src="img/products/smartphone/31_1.jpg" alt=""></a>
-					<h3>Lorem ipsum dolor sit amet.</h3>
-					<p class="price">1000$</p>
-					<div class="add_to_cart"><button class="button">BUY</button></div>
-				</div>
-				<div class="slot_item">
-					<a href="catalog.php?product_id=1"><img src="img/products/laptop/1_1.jpg" alt=""></a>
-					<h3>Lorem ipsum dolor sit amet.</h3>
-					<p class="price">1000$</p>
-					<div class="add_to_cart"><button class="button">BUY</button></div>
-				</div>
-				<div class="slot_item">
-					<a href="catalog.php?product_id=61"><img src="img/products/game/61_1.jpg" alt=""></a>
-					<h3>Lorem ipsum dolor sit amet.</h3>
-					<p class="price">1000$</p>
-					<div class="add_to_cart"><button class="button">BUY</button></div>
-				</div>
-				<div class="slot_item">
-					<a href="catalog.php?product_id=3"><img src="img/products/laptop/3_1.jpg" alt=""></a>
-					<h3>Lorem ipsum dolor sit amet.</h3>
-					<p class="price">1000$</p>
-					<div class="add_to_cart"><button class="button">BUY</button></div>
-				</div>
-				<div class="slot_item">
-					<a href="catalog.php?product_id=42"><img src="img/products/media/42_1.jpg" alt=""></a>
-					<h3>Lorem ipsum dolor sit amet.</h3>
-					<p class="price">1000$</p>
-					<div class="add_to_cart"><button class="button">BUY</button></div>
-				</div>
-			
+<!--                EXAMPLE SLOT-->
+<!--				<div class="slot_item">-->
+<!--					<a href="catalog.php?product_id=14"><img src="img/products/pc/14_1.jpg" alt=""></a>-->
+<!--					<h3>23.8" Monoblock HP 24-g118ur</h3>-->
+<!--					<p class="price">43999 ₽</p>-->
+<!--					<div class="add_to_cart"><button class="button">BUY</button></div>-->
+<!--				</div>-->
 			</div>
 		</div>
 	</main>
@@ -103,12 +73,11 @@
 		<!-- Social -->
 		<div class="icon-pack1">
         <ul>
-            <li><a href="https://www.facebook.com"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-            <li><a href="https://www.google.com"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-            <li><a href="https://www.instagram.com"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-            <li><a href="https://www.twitter.com"><i class="fa fa-twitter" aria-hidden="true"></i></a> </li>  
-             <li><a href="https://www.ru.linkedin.com"><i class="fa fa-linkedin" aria-hidden="true"></i></a> </li>  
-        </ul>
+            <li><a href="https://www.facebook.com"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.google.com"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.instagram.com"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.twitter.com"><i class="fab fa-twitter" aria-hidden="true"></i></a> </li>
+            <li><a href="https://www.ru.linkedin.com"><i class="fab fa-vk" aria-hidden="true"></i></a> </li>
         </ul>
     	</div>
     	<!-- Copyright -->
@@ -117,6 +86,7 @@
     	</div>
 	</footer>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
 </body>
 </html>
 
