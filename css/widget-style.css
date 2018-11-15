@@ -66,8 +66,10 @@ body {
 #number {
     width: 100%;
     margin-bottom: 0.3em;
+    margin-top: 0.3em;
 }
 #front-fields {
+
     position: absolute;
     bottom: 0;
     left: 0;
@@ -76,9 +78,9 @@ body {
 }
 #bank-link {
     position: absolute;
-    top: 1em;
+    top: 5px;
     right: 1em;
-    width: 320px;
+    width: 96px;
     height: 60px;
     display: block;
     position: relative;
@@ -92,7 +94,7 @@ body {
     bottom: 1em;
     right: 1em;
     text-align: right;
-    height: 1.6em;
+    height: 2.6em;
 }
 #back {
     bottom: 0;
@@ -119,11 +121,21 @@ body {
     margin-top: 0.3em;
 }
 .label {
-    font-size: 0.5em;
+    font-size: 13px;
     display: block;
-    margin-top: 0.5em;
+    /*margin-top: 0.5em;*/
+    margin-bottom: 0;
 }
-
+#validation li.valid {
+    color: green;
+}
+#validation li.invalid {
+    color: red;
+}
+#instance {
+    font-size: 0.5em;
+    line-height: 1.5em;
+}
 .icon-pack1 {
     position: relative;
     z-index: 1;

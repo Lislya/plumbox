@@ -212,14 +212,11 @@ nav {
 }
 
 /*cart-widget*/
-#cart-widget {
-    display: none;
-}
 
 .cart-widget {
     font-family: "Lato", sans-serif;
 
-    display: flex !important;
+    display: flex;
     align-items: center;
     justify-content: center;
 
@@ -306,6 +303,7 @@ nav {
 .buy-btn:hover {
     transition: all .4s;
 }
+
 
 /*footer style*/
 

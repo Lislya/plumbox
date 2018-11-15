@@ -1,6 +1,39 @@
 var cart = {}; //Main cart on cart.php
 var count = 0; //Number of products
 
+$(function () {
+    var $front = $('#front');
+    var $bankLink = $('#bank-link');
+    var $brandLogo = $('#brand-logo');
+    var $number = $('#number');
+    var $code = $('#code');
+    var $instance = $('#instance');
+    $number.on('keyup change paste', function () {
+        var cardInfo = new CardInfo($number.val())
+        if (cardInfo.bankUrl) {
+            $bankLink
+                .attr('href', cardInfo.bankUrl)
+                .css('backgroundImage', 'url("' + cardInfo.bankLogo + '")')
+                .show();
+        } else {
+            $bankLink.hide();
+        }
+        $front
+            .css('background', cardInfo.backgroundGradient)
+            .css('color', cardInfo.textColor);
+        $code.attr('placeholder', cardInfo.codeName ? cardInfo.codeName : '');
+        $number.mask(cardInfo.numberMask);
+        if (cardInfo.brandLogo) {
+            $brandLogo
+                .attr('src', cardInfo.brandLogo)
+                .attr('alt', cardInfo.brandName)
+                .show();
+        } else {
+            $brandLogo.hide();
+        }
+    }).trigger('keyup');
+});
+
 function loadCart() {
     //load info about Cart
     if (localStorage.getItem('cart')) {
@@ -34,7 +67,7 @@ function showCart(data) {
             //check if cart object is empty
             out += '<div class="alert alert-danger" role="alert">Cart is empty</div>';
             $('.cart').html(out);
-            $('#cart-widget').hide();
+            $('#cart-widget').css('display', 'none');
             localStorage.clear();
         } else {
             //get $_SESSION['username'] value
@@ -67,7 +100,7 @@ function showCart(data) {
                         out += ' <button class="book-btn btn-outline-success btn-lg ">BOOK</button>';
                     }
                     out += '<div class="cart-sum alert alert-dark alert-link" ">\n' +
-                        '        <span class="spincrement">' + cartSum + '</span><span> &#8381</span>\n' +
+                        '        <span class="spincrement"></span><span> ₽</span>\n' +
                         '         </div>';
                     $('.cart').html(out);
                     $('#cart-widget').addClass('cart-widget').html(count);
@@ -78,7 +111,7 @@ function showCart(data) {
                     $(".spincrement").spincrement({
                         from: 0,                // Стартовое число
                         to: cartSum,            // Итоговое число. Если false, то число будет браться из элемента с классом spincrement, также сюда можно напрямую прописать число. При этом оно может быть, как целым, так и с плавающей запятой
-                        decimalPlaces: 1,       // Сколько знаков оставлять после запятой
+                        decimalPlaces: 0,       // Сколько знаков оставлять после запятой
                         decimalPoint: ".",      // Разделитель десятичной части числа
                         thousandSeparator: " ", // Разделитель тыcячных
                         duration: 1000          // Продолжительность анимации в миллисекундах
@@ -125,6 +158,7 @@ function minusProd() {
 function showPopup() {
     //show Pop-Up Window
     $('#order').modal();
+
 }
 
 function saveToCart() {
@@ -154,4 +188,5 @@ function isEmpty(object) {
 
 $(document).ready(function () {
     loadCart();
+
 });

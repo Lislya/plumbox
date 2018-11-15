@@ -61,7 +61,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">CHECKOUT</h4>
+                        <h4 class="spincrement"></h4><h4>&nbsp;₽</h4>
                         <button class="close" type="button" data-dismiss="modal">×</button>
                     </div>
                     <div class="modal-body ">
@@ -74,7 +74,8 @@
 
                                 <div id="cards">
                                     <div id="front">
-                                        <img src="" alt="" id="brand-logo">
+                                        <a target="_blank" href="#" id="bank-link"></a>
+                                        <img src="js/libs/dist/brands-logos/maestro-colored.svg" alt="" id="brand-logo">
                                         <div id="front-fields">
                                             <input class="field" id="number" type="text" placeholder="0000 0000 0000 0000">
                                             <label class="label">Valid until</label>
@@ -84,9 +85,10 @@
                                     </div>
                                     <div id="back">
                                         <input class="field" id="code" type="password" placeholder="">
-                                        <label id="code-label" class="label">Safety code</label>
+                                        <label id="code-label" class="label">CVV/CVC</label>
                                     </div>
                                 </div>
+                                <pre id="instance"></pre>
 
                             </div>
                             <div class="checkbox">
@@ -121,7 +123,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-dark" type="button">CHECKOUT</button>
+                        <button class="btn btn-success" type="button">CHECKOUT</button>
                     </div>
                 </div>
             </div>
@@ -145,6 +147,8 @@
         </div>
     </footer>
 </div>
+<script src="js/libs/dist/card-info.js"></script>
+<script src="js/libs/jquery.mask.min.js"></script>
 <script src="js/cart.js"></script>
 <script src="js/signup.js"></script>
 </body>
