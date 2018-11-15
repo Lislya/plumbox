@@ -8,14 +8,17 @@
     <link rel="stylesheet" type="text/css" href="css/signup.css">
     <!-- Include Raleway font -->
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-    <!-- Include Bootstrap-icon pack for social -->
-    <link href="css/libs/bootstrap.min.css" rel="stylesheet">
+    <!-- Include Bootstrap css stylesheet  -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <!--        Tab Icon    -->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <!-- Include jQuery lib -->
-    <script type="text/javascript" src="js/libs/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="js/libs/jquery.spincrement.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/jquery-spincrement/jquery.spincrement.min.js"></script>
+    <script src="bower_components/card-info/dist/card-info.min.js"></script>
+    <script src="bower_components/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
     <!--    Include Bootstrap js-->
     <script type="text/javascript" src="js/libs/bootstrap.min.js"></script>
 </head>
@@ -77,7 +80,8 @@
                                         <a target="_blank" href="#" id="bank-link"></a>
                                         <img src="js/libs/dist/brands-logos/maestro-colored.svg" alt="" id="brand-logo">
                                         <div id="front-fields">
-                                            <input class="field" id="number" type="text" placeholder="0000 0000 0000 0000">
+                                            <input class="field" id="number" type="text"
+                                                   placeholder="0000 0000 0000 0000">
                                             <label class="label">Valid until</label>
                                             <input class="field expired" id="mm" type="text" placeholder="MM">
                                             <input class="field expired" id="yy" type="text" placeholder="YY">
@@ -92,7 +96,8 @@
 
                             </div>
                             <div class="checkbox">
-                                <input type="checkbox" id="addr_stat" name="addr_stat" value="on" onclick="ShowHide(this)">
+                                <input type="checkbox" id="addr_stat" name="addr_stat" value="on"
+                                       onclick="ShowHide(this)">
                                 <label for="addr_stat">Delivery address?</label>
                             </div>
                             <div class="addr_input" id="addr_input">
@@ -138,7 +143,7 @@
                 <li><a href="https://www.google.com"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
                 <li><a href="https://www.instagram.com"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
                 <li><a href="https://www.twitter.com"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                <li><a href="https://www.ru.linkedin.com"><i class="fab fa-vk" aria-hidden="true"></i></a></li>
+                <li><a href="https://www.vk.com"><i class="fab fa-vk" aria-hidden="true"></i></a></li>
             </ul>
         </div>
         <!-- Copyright -->
@@ -147,8 +152,7 @@
         </div>
     </footer>
 </div>
-<script src="js/libs/dist/card-info.js"></script>
-<script src="js/libs/jquery.mask.min.js"></script>
+
 <script src="js/cart.js"></script>
 <script src="js/signup.js"></script>
 </body>

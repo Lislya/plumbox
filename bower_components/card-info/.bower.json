@@ -1,0 +1,49 @@
+{
+  "name": "card-info",
+  "description": "Get bank logo, colors, brand and etc. by card number",
+  "main": "dits/card-info.js",
+  "authors": [
+    {
+      "name": "Sergey Dmitriev",
+      "email": "iserdmi@gmail.com",
+      "homepage": "http://srdm.io"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/iserdmi/card-info.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "card",
+    "brand",
+    "form",
+    "bank",
+    "logo"
+  ],
+  "homepage": "https://github.com/iserdmi/card-info",
+  "ignore": [
+    "**/.*",
+    "*.hidden.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tasks"
+  ],
+  "moduleType": [
+    "globals",
+    "node",
+    "es6"
+  ],
+  "version": "1.2.4",
+  "_release": "1.2.4",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.2.4",
+    "commit": "a5284e661a62d49281bcbf28c843a2ec101766ed"
+  },
+  "_source": "https://github.com/iserdmi/card-info.git",
+  "_target": "^1.2.4",
+  "_originalSource": "card-info",
+  "_direct": true
+}

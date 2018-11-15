@@ -11,10 +11,10 @@
     <!-- Include Bootstrap-icon pack for social -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/libs/bootstrap-grid.min.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-grid.min.css">
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <!-- Include jQuery lib -->
-    <script type="text/javascript" src="js/libs/jquery-3.3.1.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
 <!-- Connect to DB -->
@@ -61,7 +61,7 @@
             <li><a href="https://www.google.com"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
             <li><a href="https://www.instagram.com"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
             <li><a href="https://www.twitter.com"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-            <li><a href="https://www.ru.linkedin.com"><i class="fab fa-vk" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.vk.com"><i class="fab fa-vk" aria-hidden="true"></i></a></li>
         </ul>
     </div>
     <!-- Copyright -->

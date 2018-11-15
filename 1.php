@@ -14,7 +14,7 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <!-- Include jQuery lib -->
-    <script type="text/javascript" src="js/libs/jquery-3.3.1.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
 <!-- Connect to DB -->
@@ -92,7 +92,7 @@
                 <li><a href="https://www.google.com"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
                 <li><a href="https://www.instagram.com"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
                 <li><a href="https://www.twitter.com"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                <li><a href="https://www.ru.linkedin.com"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                <li><a href="https://www.vk.com"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
             </ul>
         </div>
         <!-- Copyright -->

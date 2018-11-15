@@ -8,9 +8,8 @@
     <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
     <link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon"><!-- Include jQuery lib -->
 
-    <script src="js/libs/jquery-3.3.1.min.js" type="text/javascript">
-    </script>
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
+    <script src="js/libs/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <link href="bower_components/fotorama/fotorama.css" rel="stylesheet">
 </head>
 <body>
 <!-- Connect to DB -->
@@ -82,7 +81,7 @@
                 <a href="https://www.twitter.com"><i aria-hidden="true" class="fab fa-twitter"></i></a>
             </li>
             <li>
-                <a href="https://www.ru.linkedin.com"><i aria-hidden="true" class="fab fa-vk"></i></a>
+                <a href="https://www.vk.com"><i aria-hidden="true" class="fab fa-vk"></i></a>
             </li>
         </ul>
     </div><!-- Copyright -->
@@ -90,8 +89,7 @@
         <p>All rights reserved &copy; <?php echo date('Y'); ?></p>
     </div>
 </footer>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js">
-</script>
+<script src="bower_components/fotorama/fotorama.js"></script>
 <script src="js/index.js" type="text/javascript">
 </script>
 </body>

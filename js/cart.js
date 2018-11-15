@@ -7,7 +7,6 @@ $(function () {
     var $brandLogo = $('#brand-logo');
     var $number = $('#number');
     var $code = $('#code');
-    var $instance = $('#instance');
     $number.on('keyup change paste', function () {
         var cardInfo = new CardInfo($number.val())
         if (cardInfo.bankUrl) {

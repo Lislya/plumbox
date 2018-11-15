@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Sign In</title>
-    <link href="css/libs/bootstrap.min.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/login.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
@@ -66,7 +66,7 @@
             <li><a href="https://www.google.com"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
             <li><a href="https://www.instagram.com"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
             <li><a href="https://www.twitter.com"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-            <li><a href="https://www.ru.linkedin.com"><i class="fab fa-vk" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.vk.com"><i class="fab fa-vk" aria-hidden="true"></i></a></li>
         </ul>
     </div>
     <div id="rights">

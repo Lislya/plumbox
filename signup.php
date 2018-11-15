@@ -3,14 +3,14 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Sign Up</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/signup.css">
 	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-	<script type="text/javascript" src="js/libs/jquery-3.3.1.min.js"></script>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
 	<!-- Регистрация пользователя -->
@@ -107,7 +107,7 @@
             <li><a href="https://www.google.com"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
             <li><a href="https://www.instagram.com"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
             <li><a href="https://www.twitter.com"><i class="fab fa-twitter" aria-hidden="true"></i></a> </li>
-            <li><a href="https://www.ru.linkedin.com"><i class="fab fa-vk" aria-hidden="true"></i></a> </li>
+            <li><a href="https://www.vk.com"><i class="fab fa-vk" aria-hidden="true"></i></a> </li>
         </ul>
     	</div>
     	<div id="rights">
