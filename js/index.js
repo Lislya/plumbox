@@ -1,5 +1,6 @@
 var out = ''; //html output
 var cart = {}; //mini-cart
+var count = 0; //number of products
 
 function randomProd(){
     //loading random slot
@@ -36,23 +37,22 @@ function addToCart() {
         cart[id]['name'] = name;
         cart[id]['img'] = img;
         cart[id]['num'] = 1;
+        count ++;
     } else {
         cart[id]['num']++;
+        count++;
     }
-    showMiniCart();
     saveMiniCart();
-}
-function showMiniCart() {
-    var out = '';
-    for (var key in cart){
-        out += cart[key].name + '---' + cart[key].num+'<br>';
+    if(count>0) {
+        addWidget();
     }
-    $('.mini-cart').html(out);
 }
+
 
 function saveMiniCart(){
     //saving mini-cart
     localStorage.setItem('cart',JSON.stringify(cart));
+    localStorage.setItem('count', count);
 }
 
 function loadMiniCart(){
@@ -62,9 +62,15 @@ function loadMiniCart(){
         //show local storage mini-cart
         if(isJsonString(localStorage.getItem('cart'))){
             cart = JSON.parse(localStorage.getItem('cart'));
-            showMiniCart();
+            count = localStorage.getItem('count');
+            addWidget();
         }
     }
+}
+
+function addWidget() {
+    //show number of products near the mini-cart icon
+        $('#cart-widget').addClass('cart-widget').html(localStorage.getItem('count'));
 }
 
 function isJsonString(str) {
@@ -80,4 +86,5 @@ function isJsonString(str) {
 
 $(document).ready(function () {
     randomProd();
+    loadMiniCart();
 });

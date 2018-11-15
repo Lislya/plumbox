@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <title>PlumBox</title><!-- index.php style sheet -->
     <link href="css/style.css" rel="stylesheet" type="text/css"><!-- Include Raleway font -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"><!-- Include Bootstrap-icon pack for social -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <!-- Include Bootstrap-icon pack for social -->
     <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
     <link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon"><!-- Include jQuery lib -->
 
-    <script src="js/libs/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js" type="text/javascript"></script>
     <link href="bower_components/fotorama/fotorama.css" rel="stylesheet">
 </head>
 <body>
