@@ -9,11 +9,11 @@
 	<!-- Include Raleway font -->
 	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 	<!-- Include Bootstrap-icon pack for social -->
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="css/libs/bootstrap-grid.min.css">
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 	<!-- Include jQuery lib -->
-	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/libs/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 	<!-- Connect to DB -->
@@ -49,127 +49,18 @@
 		</nav>
 	</header>
 	<main>
-		<div class="container">
-			<div class="row">
-				<div class="col-sm">
-					<ul class="catalog">
-						<li>
-							<a href="#" class="catalog_item">
-								<span class="icon">
-									<img src="img/icon/laptop_icon.png" alt="">
-								</span>
-								<span class="title">Laptops & Tablets</span>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="catalog_item">
-								<span class="icon">
-									<img src="img/icon/pc_icon.png" alt="">
-								</span>
-								<span class="title">PC & Accessories</span>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="catalog_item">
-								<span class="icon">
-									<img src="img/icon/smartphone_icon.png" alt="">
-								</span>
-								<span class="title">SmartPhones</span>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="catalog_item">
-								<span class="icon">
-									<img src="img/icon/tv_icon.png" alt="">
-								</span>
-								<span class="title">TV & Media</span>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="catalog_item">
-								<span class="icon">
-									<img src="img/icon/game_icon.png" alt="">
-								</span>
-								<span class="title">Game Consoles</span>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="catalog_item">
-								<span class="icon">
-									<img src="img/icon/camera_icon.png" alt="">
-								</span>
-								<span class="title">Cameras</span>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="catalog_item">
-								<span class="icon">
-									<img src="img/icon/hardware_icon.png" alt="" >
-								</span>
-								<span class="title">Network Hardware</span>
-							</a>
-						</li>
 
-					</ul>
-				</div>
-				<div class="col-9">
-		<!-- shop slots * 6 -->
-					<div class="slot_container">
-						<div class="slot">
-						<div class="slot_item">
-							<a href="#"><img src="img/products/phones/pc_2.png" alt=""></a>
-							<h3>Lorem ipsum dolor sit amet.</h3>
-							<p class="price">1000$</p>
-							<div class="add_to_cart"><button class="button">BUY</button></div>
-						</div>
-						<div class="slot_item">
-							<a href="#"><img src="img/products/phones/pc_2.png" alt=""></a>
-							<h3>Lorem ipsum dolor sit amet.</h3>
-							<p class="price">1000$</p>
-							<div class="add_to_cart"><button class="button">BUY</button></div>
-						</div>
-						<div class="slot_item">
-							<a href="#"><img src="img/products/phones/pc_2.png" alt=""></a>
-							<h3>Lorem ipsum dolor sit amet.</h3>
-							<p class="price">1000$</p>
-							<div class="add_to_cart"><button class="button">BUY</button></div>
-						</div>
-						<div class="slot_item">
-							<a href="#"><img src="img/products/phones/pc_2.png" alt=""></a>
-							<h3>Lorem ipsum dolor sit amet.</h3>
-							<p class="price">1000$</p>
-							<div class="add_to_cart"><button class="button">BUY</button></div>
-						</div>
-						<div class="slot_item">
-							<a href="#"><img src="img/products/phones/pc_2.png" alt=""></a>
-							<h3>Lorem ipsum dolor sit amet.</h3>
-							<p class="price">1000$</p>
-							<div class="add_to_cart"><button class="button">BUY</button></div>
-						</div>
-							<div class="slot_item">
-								<a href="#"><img src="img/products/phones/pc_2.png" alt=""></a>
-								<h3>Lorem ipsum dolor sit amet.</h3>
-								<p class="price">1000$</p>
-								<div class="add_to_cart"><button class="button">BUY</button></div>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 	</main>
 	
 	<footer>
 		<!-- Social -->
 		<div class="icon-pack1">
         <ul>
-            <li><a href="https://www.facebook.com"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-            <li><a href="https://www.google.com"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-            <li><a href="https://www.instagram.com"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-            <li><a href="https://www.twitter.com"><i class="fa fa-twitter" aria-hidden="true"></i></a> </li>  
-             <li><a href="https://www.ru.linkedin.com"><i class="fa fa-linkedin" aria-hidden="true"></i></a> </li>  
-        </ul>
+            <li><a href="https://www.facebook.com"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.google.com"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.instagram.com"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.twitter.com"><i class="fab fa-twitter" aria-hidden="true"></i></a> </li>
+            <li><a href="https://www.ru.linkedin.com"><i class="fab fa-vk" aria-hidden="true"></i></a> </li>
         </ul>
     	</div>
     	<!-- Copyright -->
@@ -177,7 +68,6 @@
     		<p>All rights reserved &copy; <?php echo date('Y'); ?> </p>
     	</div>
 	</footer>
-	<script type="text/javascript" src="js/index.js"></script>
 </body>
 </html>
 

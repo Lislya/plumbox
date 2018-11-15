@@ -9,10 +9,10 @@ function ShowHide(addr_stat, addr_input){
 
 //Dynamic username validation
 $("#username").change(function(){
-	var username = $("#username").val();
+	var username = $(this).val();
 	var mask = /^[a-zA-Z][a-zA-Z0-9-_\.]{3,20}$/g;
 	var resUsername = username.search(mask);
-	if (resUsername == -1){
+	if (resUsername === -1){
 		$("#alert_username").hide().text("Incorrect username").css("display","block");
 	} else{
 		$.ajax({
@@ -40,10 +40,10 @@ $("#username").keyup(function(){
 
 // Dynamic email validation
 $("#email").change(function(){
-	var email = $("#email").val();
+	var email = $(this).val();
 	var mask = /^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/g;
 	var resEmail = email.search(mask);
-	if (resEmail == -1){
+	if (resEmail === -1){
 		$("#alert_email").hide().text("Incorrect mail").css("display","block");
 	} else{
 		$.ajax({

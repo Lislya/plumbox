@@ -3,11 +3,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Sign In</title>
-	 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="css/libs/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/login.css">
 	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 </head>
 <body>
@@ -17,7 +17,7 @@
 		</div>
 		<nav>
 			<div class="navbar">
-				<div class="navbar-left"></div>
+                <div class="navbar-left"><a href="cart.php"><img src="img/icon/cart.png" alt="cart"></a> <span id="cart-widget"></span></div>
 				<div class="navbar-center">
 					<a href="index.php">HOME</a>
 					<a href="catalog.php">CATALOG</a>
@@ -45,7 +45,7 @@
             <?php if(isset($fmsg)){?> <div class="alert alert-danger" role="alert"><?php echo $fmsg; ?> </div><?php }?>
 			<div class="input-container">
 				<input type="text" name="username" id="username" class="login_input" required>
-				<label for="login" class="label">Login</label>
+				<label for="username" class="label">Login</label>
 			</div>
 			<div class="input-container">
 				<input type="password" name="password" id="password" class="login_input" required>
@@ -58,12 +58,11 @@
 	<footer>	
 		<div class="icon-pack1">
         <ul>
-            <li><a href="https://www.facebook.com"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-            <li><a href="https://www.google.com"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-            <li><a href="https://www.instagram.com"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-            <li><a href="https://www.twitter.com"><i class="fa fa-twitter" aria-hidden="true"></i></a> </li>  
-             <li><a href="https://www.ru.linkedin.com"><i class="fa fa-linkedin" aria-hidden="true"></i></a> </li>  
-        </ul>
+            <li><a href="https://www.facebook.com"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.google.com"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.instagram.com"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.twitter.com"><i class="fab fa-twitter" aria-hidden="true"></i></a> </li>
+            <li><a href="https://www.ru.linkedin.com"><i class="fab fa-vk" aria-hidden="true"></i></a> </li>
         </ul>
     	</div>
     	<div id="rights">
