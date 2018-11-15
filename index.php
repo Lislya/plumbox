@@ -11,7 +11,11 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 	<!-- Include jQuery lib -->
+<<<<<<< HEAD
 	<script type="text/javascript" src="js/libs/jquery-3.3.1.min.js"></script>
+=======
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+>>>>>>> master
 	<link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
 </head>
 <body>
@@ -24,7 +28,11 @@
 		<!-- Navigation bar -->
 		<nav>
 			<div class="navbar">
+<<<<<<< HEAD
 				<div class="navbar-left"><a href="cart.php"><img src="img/icon/cart.png" alt="cart"></a> <span id="cart-widget"></span></div>
+=======
+				<div class="navbar-left"><a href="cart.php"><img src="img/icon/cart.png" alt="cart"></a></div>
+>>>>>>> master
 				<div class="navbar-center">
 					<a href="index.php">HOME</a>
 					<a href="catalog.php">CATALOG</a>
@@ -58,6 +66,7 @@
 		<!-- shop slots * 6 -->
 		<div class="slot_container">
 			<div class="slot">
+<<<<<<< HEAD
 <!--                EXAMPLE SLOT-->
 <!--				<div class="slot_item">-->
 <!--					<a href="catalog.php?product_id=14"><img src="img/products/pc/14_1.jpg" alt=""></a>-->
@@ -65,6 +74,45 @@
 <!--					<p class="price">43999 ₽</p>-->
 <!--					<div class="add_to_cart"><button class="button">BUY</button></div>-->
 <!--				</div>-->
+=======
+				<div class="slot_item">
+					<a href="catalog.php?product_id=14"><img src="img/products/pc/14_1.jpg" alt=""></a>
+					<h3>Lorem ipsum dolor sit amet.</h3>
+					<p class="price">1000$</p>
+					<div class="add_to_cart"><button class="button">BUY</button></div>
+				</div>
+				<div class="slot_item">
+					<a href="catalog.php?product_id=31"><img src="img/products/smartphone/31_1.jpg" alt=""></a>
+					<h3>Lorem ipsum dolor sit amet.</h3>
+					<p class="price">1000$</p>
+					<div class="add_to_cart"><button class="button">BUY</button></div>
+				</div>
+				<div class="slot_item">
+					<a href="catalog.php?product_id=1"><img src="img/products/laptop/1_1.jpg" alt=""></a>
+					<h3>Lorem ipsum dolor sit amet.</h3>
+					<p class="price">1000$</p>
+					<div class="add_to_cart"><button class="button">BUY</button></div>
+				</div>
+				<div class="slot_item">
+					<a href="catalog.php?product_id=61"><img src="img/products/game/61_1.jpg" alt=""></a>
+					<h3>Lorem ipsum dolor sit amet.</h3>
+					<p class="price">1000$</p>
+					<div class="add_to_cart"><button class="button">BUY</button></div>
+				</div>
+				<div class="slot_item">
+					<a href="catalog.php?product_id=3"><img src="img/products/laptop/3_1.jpg" alt=""></a>
+					<h3>Lorem ipsum dolor sit amet.</h3>
+					<p class="price">1000$</p>
+					<div class="add_to_cart"><button class="button">BUY</button></div>
+				</div>
+				<div class="slot_item">
+					<a href="catalog.php?product_id=42"><img src="img/products/media/42_1.jpg" alt=""></a>
+					<h3>Lorem ipsum dolor sit amet.</h3>
+					<p class="price">1000$</p>
+					<div class="add_to_cart"><button class="button">BUY</button></div>
+				</div>
+			
+>>>>>>> master
 			</div>
 		</div>
 	</main>
@@ -86,7 +134,10 @@
     	</div>
 	</footer>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
+<<<<<<< HEAD
     <script type="text/javascript" src="js/index.js"></script>
+=======
+>>>>>>> master
 </body>
 </html>
 
