@@ -7,7 +7,8 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/signup.css">
 	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 	<script type="text/javascript" src="js/libs/jquery-3.3.1.min.js"></script>
 </head>
@@ -66,7 +67,7 @@
 				</div>
 				<div class="checkbox">
 					<label for="checkbox">Delivery Address?</label>
-					<input type="checkbox" name="addr_stat" id="addr_stat" value="on" onchange="ShowHide(this,'addr_input');">
+					<input type="checkbox" name="addr_stat" id="addr_stat" value="on" onchange="ShowHide(this);">
 				</div>
 				<div class="addr_input" id="addr_input">
 					<div class="form-item_addr">

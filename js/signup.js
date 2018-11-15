@@ -1,6 +1,6 @@
 //Показывает дополнительные поля ввода при регистрации
-function ShowHide(addr_stat, addr_input){
-	addr_input = document.getElementById('addr_input');
+function ShowHide(addr_stat){
+	var addr_input = document.getElementById('addr_input');
 	if (addr_stat.checked)
 	{
 		addr_input.style.display = "flex";
