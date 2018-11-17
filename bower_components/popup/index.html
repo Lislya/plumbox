@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Prompt Dialog with background blur</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+  <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Montserrat'>
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,600,700,800'>
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900'>
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css'>
+
+      <link rel="stylesheet" href="css/popup.css">
+
+  
+</head>
+
+<body>
+  <input type="checkbox" name="dialog_state" id="dialog_state" class="dialog_state">
+<div id='dialog'>
+  <label id="dlg-back" for="dialog_state"></label>
+  <div id='dlg-wrap'>
+    <label id="dlg-close" for="dialog_state"><i class="icon ion-ios-close-empty"></i></label>
+    <h2 id='dlg-header'>Are you sure?</h2>
+    <div id='dlg-content'>You are about to kill a puppy, that's some serious shit. Have you really thought this through?</div>
+    <div id='dlg-prompt'>
+      <div class='button positive'><i class="icon ion-ios-checkmark-empty"></i> Yes, let's do it!</div>
+      <div class='button'><i class="icon ion-ios-close-empty"></i> No, I'll reconsider</div>
+    </div>
+  </div>
+</div>
+<main id='main' class='main_area'>
+  <div class='center'>
+    <label class="button" for="dialog_state"><i class="icon ion-ios-upload-outline
+      "></i> Open the dialog</label>
+  </div>
+<div id='console'></div>
+</main>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+    <script  src="js/popup.js"></script>
+
+</body>
+</html>

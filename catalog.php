@@ -1,3 +1,5 @@
+<!-- Connect to DB -->
+<?php require_once('function/connect.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,8 +22,7 @@
 
 </head>
 <body>
-<!-- Connect to DB -->
-<?php require_once('function/connect.php') ?>
+
 <header>
     <div class="logo">
         <a href="index.php"><img src="img/logo.png" alt="PlumBox" class="graphic_logo"></a>

@@ -1,15 +1,19 @@
+<!-- Connect to DB -->
+<?php require('function/connect.php'); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>PlumBox</title>
     <!-- index.php style sheet -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/signup.css">
     <!-- Include Raleway font -->
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <!-- Include Bootstrap css stylesheet  -->
-    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <!--        Tab Icon    -->
@@ -20,11 +24,10 @@
     <script src="bower_components/card-info/dist/card-info.min.js"></script>
     <script src="bower_components/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
     <!--    Include Bootstrap js-->
-    <script type="text/javascript" src="js/libs/bootstrap.min.js"></script>
+    <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-<!-- Connect to DB -->
-<?php require('function/connect.php'); ?>
+
 <div class="wrapper">
     <header>
         <div class="logo">
@@ -68,17 +71,17 @@
                         <button class="close" type="button" data-dismiss="modal">×</button>
                     </div>
                     <div class="modal-body ">
-                        <form method="POST" action="" class="">
+                        <form method="POST" action="">
                             <div class="form-item">
                                 <input type="email" name="email" id="email" class="signup-input" required>
                                 <div class="alert alert-danger" role="alert" id="alert_email"
                                      style="display: none;"></div>
                                 <label for="email" class="signup-label">Email</label>
-
+                                <!--CC Widget-->
                                 <div id="cards">
                                     <div id="front">
                                         <a target="_blank" href="#" id="bank-link"></a>
-                                        <img src="js/libs/dist/brands-logos/maestro-colored.svg" alt="" id="brand-logo">
+                                        <img src="" alt="" id="brand-logo">
                                         <div id="front-fields">
                                             <input class="field" id="number" type="text"
                                                    placeholder="0000 0000 0000 0000">
@@ -92,13 +95,17 @@
                                         <label id="code-label" class="label">CVV/CVC</label>
                                     </div>
                                 </div>
-                                <pre id="instance"></pre>
-
                             </div>
+
                             <div class="checkbox">
+                                <label for="addr_stat">Delivery address?</label>
+
                                 <input type="checkbox" id="addr_stat" name="addr_stat" value="on"
                                        onclick="ShowHide(this)">
-                                <label for="addr_stat">Delivery address?</label>
+
+                                <select class="form-control" id="pickup">
+
+                                </select>
                             </div>
                             <div class="addr_input" id="addr_input">
                                 <div class="form-item_addr">
@@ -128,7 +135,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-success" type="button">CHECKOUT</button>
+                        <input class="btn btn-success" type="submit" value="CHECKOUT">
                     </div>
                 </div>
             </div>
@@ -155,6 +162,7 @@
 
 <script src="js/cart.js"></script>
 <script src="js/signup.js"></script>
+
 </body>
 </html>
 

@@ -1,3 +1,6 @@
+<?php
+require('function/testreg.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,9 +38,7 @@
     </nav>
 </header>
 <main>
-    <?php
-    require('function/testreg.php');
-    ?>
+
     <form action="" method="POST" class="form">
 
         <div class="blank">

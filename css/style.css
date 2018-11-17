@@ -21,6 +21,9 @@ li {
 
     text-decoration: none;
 }
+img {
+    vertical-align: baseline !important;
+}
 
 body {
     font-family: "Raleway", sans-serif;
@@ -61,6 +64,7 @@ nav {
     max-width: 100%;
     height: 50px;
     margin: auto;
+    line-height: 0;
 }
 
 .navbar {
@@ -182,8 +186,6 @@ nav {
     width: 90%;
     padding-top: 14px;
 
-    /*padding-left: 10%;*/
-
     text-align: right;
 }
 
@@ -302,6 +304,23 @@ nav {
 .book-btn:hover,
 .buy-btn:hover {
     transition: all .4s;
+}
+
+/*style for select*/
+
+/*style for user's orders*/
+.layout{
+    display: flex;
+    height: 92px;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #000;
+}
+.order{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4em;
 }
 
 

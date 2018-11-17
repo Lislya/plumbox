@@ -1,10 +1,19 @@
 //Показывает дополнительные поля ввода при регистрации
 function ShowHide(addr_stat){
 	var addr_input = document.getElementById('addr_input');
+	var pickup = document.getElementById('pickup');
 	if (addr_stat.checked)
 	{
+		if(pickup) {
+            pickup.style.display = "none";
+        }
 		addr_input.style.display = "flex";
-	} else addr_input.style.display = "none";
+	} else {
+		addr_input.style.display = "none";
+		if (pickup){
+            pickup.style.display = "block";
+		}
+    }
 }
 
 //Dynamic username validation

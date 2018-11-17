@@ -34,7 +34,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['name
 
     if ($addr_stat == 1) {
         $id_user = $connection->insert_id;
-        $sql = "INSERT INTO address VALUES (NULL, $region, $city, $street, $house, $corp, $flat, $post_index, $id_user)";
+        $sql = "INSERT INTO address VALUES (NULL, $region, $city, $street, $house, $corp, $flat, $post_index, $id_user,NULL)";
         $connection->query($sql);
     }
     //Registrattion state message

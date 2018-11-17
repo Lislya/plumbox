@@ -1,3 +1,6 @@
+<!-- Регистрация пользователя -->
+<?php require 'function/reg.php' ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,8 +16,7 @@
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
-	<!-- Регистрация пользователя -->
-    <?php require 'function/reg.php' ?>
+
     <!-- Шапка -->
 	<header>
 		<div class="logo">

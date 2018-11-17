@@ -1,3 +1,5 @@
+<!-- Connect to DB -->
+<?php require('function/connect.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,8 +15,7 @@
     <link href="bower_components/fotorama/fotorama.css" rel="stylesheet">
 </head>
 <body>
-<!-- Connect to DB -->
-<?php require('function/connect.php'); ?>
+
 <header>
     <div class="logo">
         <a href="index.php"><img alt="PlumBox" class="graphic_logo" src="img/logo.png"></a>
@@ -91,7 +92,6 @@
     </div>
 </footer>
 <script src="bower_components/fotorama/fotorama.js"></script>
-<script src="js/index.js" type="text/javascript">
-</script>
+<script src="js/index.js" type="text/javascript"></script>
 </body>
 </html>

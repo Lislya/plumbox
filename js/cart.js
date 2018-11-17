@@ -2,13 +2,14 @@ var cart = {}; //Main cart on cart.php
 var count = 0; //Number of products
 
 $(function () {
-    var $front = $('#front');
-    var $bankLink = $('#bank-link');
-    var $brandLogo = $('#brand-logo');
-    var $number = $('#number');
-    var $code = $('#code');
+    //Credit Card Widget
+    var $front = $('#front'); // front side of the CC
+    var $bankLink = $('#bank-link'); // backside of the CC
+    var $brandLogo = $('#brand-logo'); //logo of payment system | VISA, MASTERCARD
+    var $number = $('#number'); // CC number
+    var $code = $('#code'); // CVV|CVC
     $number.on('keyup change paste', function () {
-        var cardInfo = new CardInfo($number.val())
+        var cardInfo = new CardInfo($number.val()); //CardInfo Object
         if (cardInfo.bankUrl) {
             $bankLink
                 .attr('href', cardInfo.bankUrl)
@@ -92,10 +93,10 @@ function showCart(data) {
                         cartSum += sum;
                     }
                     if (sessionUser === '') {
-                        //if user is logged in then show buy button
+                        //if user is not logged in then show buy button
                         out += ' <button class="buy-btn book-btn btn-outline-success btn-lg" type="button" data-toggle="modal" data-target="#order">BUY</button>  ';
                     } else {
-                        //if user is not logged in then show book button
+                        //if user is  logged in then show book button
                         out += ' <button class="book-btn btn-outline-success btn-lg ">BOOK</button>';
                     }
                     out += '<div class="cart-sum alert alert-dark alert-link" ">\n' +
@@ -103,10 +104,11 @@ function showCart(data) {
                         '         </div>';
                     $('.cart').html(out);
                     $('#cart-widget').addClass('cart-widget').html(count);
-                    $('.remove-btn').on('click', delProd);
-                    $('.plus-btn').on('click', plusProd);
-                    $('.minus-btn').on('click', minusProd);
-                    $('.buy-btn').on('click', showPopup);
+                    $('.remove-btn').on('click', delProd); //delete product num
+                    $('.plus-btn').on('click', plusProd); // iterate product num
+                    $('.minus-btn').on('click', minusProd); //decrease product num
+                    $('.buy-btn').on('click', showPopup); // show instant order checkout window
+                    $('.book-btn').on('click',bookProd); //book products
                     $(".spincrement").spincrement({
                         from: 0,                // Стартовое число
                         to: cartSum,            // Итоговое число. Если false, то число будет браться из элемента с классом spincrement, также сюда можно напрямую прописать число. При этом оно может быть, как целым, так и с плавающей запятой
@@ -155,9 +157,25 @@ function minusProd() {
 }
 
 function showPopup() {
-    //show Pop-Up Window
+    //show Pop-Up Window for not logged user
     $('#order').modal();
+    //Fill select section with shops information
+    $.post({
+        url: "function/core.php",
+        data: {action: "getShop"},
+        success: function (response) {
+            let shopName= JSON.parse(response);
+            let out = '';
+            for (let i=0;i<shopName.length;i++){
+                out += '<option value="'+i+'">'+shopName[i]+'</option>';
+            }
+            $('#pickup').html(out);
+        }
+    });
+}
 
+function bookProd() {
+    
 }
 
 function saveToCart() {
@@ -179,13 +197,15 @@ function isJsonString(str) {
 
 function isEmpty(object) {
     //check if object is empty
-    for (var key in object)
-        if (object.hasOwnProperty(key)) return true;
+    for (var key in object) {
+        if (object.hasOwnProperty(key)) {
+            return true;
+        }
+    }
     return false;
 }
 
 
 $(document).ready(function () {
     loadCart();
-
 });

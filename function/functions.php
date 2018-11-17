@@ -4,48 +4,39 @@ class Product
 {
     private $name, $vendor, $quantity, $price_s, $img = array(), $cat;
 
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
-    public function getVendor()
-    {
+    public function getVendor() {
         return $this->vendor;
     }
 
-    public function getP()
-    {
+    public function getP() {
         return $this->price_s;
     }
 
-    public function getImg()
-    {
+    public function getImg() {
         return $this->img[0];
     }
 
-    public function getQ()
-    {
+    public function getQ() {
         return $this->quantity;
     }
 
-    public function getCtg()
-    {
+    public function getCtg() {
         return $this->cat;
     }
 
-    public function setImg($img)
-    {
+    public function setImg($img) {
         $this->img[] = $img;
     }
 
-    public function setCtg($ctg)
-    {
+    public function setCtg($ctg) {
         $this->cat = $ctg;
     }
 
-    public function prodSet($n, $v, $p, $c, $q)
-    {
+    public function prodSet($n, $v, $p, $c, $q) {
         $this->name = $n;
         $this->vendor = $v;
         $this->price_s = $p;
@@ -54,8 +45,7 @@ class Product
     }
 }
 
-function connect()
-{
+function connect() {
     //connection function
     $conn = new mysqli('localhost', 'root', '', 'plumbox');
     $conn->set_charset('utf-8');
@@ -66,8 +56,7 @@ function connect()
     return $conn;
 }
 
-function category($cat)
-{
+function category($cat) {
     //category product output
     $conn = connect();
     //Product class
@@ -126,13 +115,13 @@ function category($cat)
         }
         echo json_encode($list, JSON_NUMERIC_CHECK | JSON_UNESCAPED_UNICODE);
     }
+    $conn->close();
 }
 
-function loadCartGoods($json)
-{
+function loadCartGoods($json) {
     //loading goods to cart.php
     $conn = connect();
-    $cart = json_decode($json, true);
+    $cart = json_decode($json, TRUE);
     if (json_last_error() === JSON_ERROR_NONE) {
         foreach ($cart as $id => $value) {
             $id_product = $id;
@@ -144,17 +133,17 @@ function loadCartGoods($json)
         }
         echo json_encode($cart, JSON_NUMERIC_CHECK | JSON_UNESCAPED_UNICODE);
     } else die("It's not JSON format");
+    $conn->close();
 }
 
-function getSession()
-{
-    // get username from global SESSION array
+function getSession() {
+    // get id user from global SESSION array
     $conn = connect();
-    echo $_SESSION['username'];
+    echo $_SESSION['id_user'];
+    $conn->close();
 }
 
-function randomProd($id)
-{
+function randomProd($id) {
     $conn = connect();
 
     $list = array(); //array for json file
@@ -199,4 +188,102 @@ function randomProd($id)
     $list[$id]['category'] = $product->getCtg();
     $list[$id]['img'] = $product->getImg();
     echo json_encode($list, JSON_NUMERIC_CHECK | JSON_UNESCAPED_UNICODE);
+    $conn->close();
+}
+
+function getShop() {
+    //get shops information
+    $shopName = array();
+    $conn = connect();
+    $sql = "SELECT name_shop FROM shop";
+    if ($result_set = $conn->query($sql)) {
+        while ($rows = $result_set->fetch_assoc()) {
+            $shopName[] = $rows['name_shop'];
+        }
+    }
+    $result_set->free();
+
+    echo json_encode($shopName, JSON_NUMERIC_CHECK | JSON_UNESCAPED_UNICODE);
+    $conn->close();
+}
+
+function getPersonal($uid) {
+    //get user personal information in account.php
+    $conn = connect();
+    $list = array();
+    $sql = "SELECT * FROM user WHERE id_user='$uid'";
+    if ($result_set = $conn->query($sql)) {
+        $row = $result_set->fetch_assoc();
+        $list['name'] = $row['name'];
+        $list['s_name'] = $row['s_name'];
+        $list['username'] = $row['username'];
+        $list['d_birth'] = $row['d_birth'];
+        $list['email'] = $row['email'];
+        $list['tel'] = $row['tel'];
+        $list['id_role'] = $row['id_role'];
+        $list['addr_stat'] = $row['addr_stat'];
+
+    }
+    $result_set->free();
+
+    //get address
+    if ($list['addr_stat'] == 1) {
+        $sql = "SELECT * FROM address WHERE id_user = '$uid' ";
+        if ($result_set = $conn->query($sql)) {
+            $row = $result_set->fetch_assoc();
+            $list['region'] = $row['region'];
+            $list['city'] = $row['city'];
+            $list['street'] = $row['street'];
+            $list['house'] = $row['house'];
+            $list['corp'] = $row['corp'];
+            $list['flat'] = $row['flat'];
+            $list['post_index'] = $row['post_index'];
+        }
+        $result_set->free();
+    }
+
+    //get role name
+    $id_role = $list['id_role'];
+    $sql = "SELECT name_role FROM role WHERE id_role='$id_role'";
+    if ($result_set = $conn->query($sql)) {
+        $row = $result_set->fetch_assoc();
+        $list['role'] = $row['name_role'];
+    }
+    $result_set->free();
+    echo json_encode($list, JSON_NUMERIC_CHECK | JSON_UNESCAPED_UNICODE);
+    $conn->close();
+}
+
+function getOrder($uid) {
+    //get user's orders
+    $conn = connect();
+    $list = array();
+    $sql = "SELECT * FROM `order` WHERE id_user = '$uid'";
+    if ($result_set = $conn->query($sql)) {
+        while ($rows = $result_set->fetch_assoc()) {
+
+            $list[$rows['id_order']]['order_stat'] = $rows['order_stat'];
+            $list[$rows['id_order']]['date'] = $rows['date'];
+            $list[$rows['id_order']]['delivery_stat'] = $rows['delivery_stat'];
+            $list[$rows['id_order']]['id_discount'] = $rows['id_discount'];
+
+            $id_order = $rows['id_order'];
+            $sql = "SELECT id_product, quantity FROM order_product WHERE id_order='$id_order'";
+            if ($result_set1 = $conn->query($sql)) {
+                while ($rows1 = $result_set1->fetch_assoc()) {
+
+                    $id_product = $rows1['id_product'];
+                    $sql = "SELECT name_product, price_s FROM product WHERE id_product = '$id_product'";
+                    if ($result_set2 = $conn->query($sql)) {
+                        $row = $result_set2->fetch_assoc();
+                        $list[$rows['id_order']]['product'][$row['name_product']]['price']= $row['price_s'];
+                        $list[$rows['id_order']]['product'][$row['name_product']]['quantity'] = $rows1['quantity'];
+                    } $result_set2->free();
+                }
+            } $result_set1->free();
+        }
+        $result_set->free();
+    }
+    echo json_encode($list, JSON_NUMERIC_CHECK | JSON_UNESCAPED_UNICODE);
+    $conn->close();
 }
