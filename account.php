@@ -125,15 +125,7 @@
 </footer>
 
 <script src="js/account.js"></script>
-<script>
-    $(document).ready(function () {
 
-        $('.dialog_state').click(function () {
-            $('.dialog').attr('id','dialog');
-            $('.dlg-wrap').attr('id','dlg-wrap');
-        });
-    });
-</script>
 </body>
 </html>
 

@@ -1,0 +1,141 @@
+
+#feedback-page {
+    text-align: center;
+}
+
+#form-main {
+    float: left;
+
+    width: 100%;
+    height: 400px;
+    margin-bottom: 20px;
+}
+
+#form-div {
+    position: absolute;
+    left: 5%;
+
+    float: left;
+
+    width: 64%;
+    height: 382px;
+    padding-top: 25px;
+    padding-right: 25px;
+    padding-bottom: 25px;
+    padding-left: 25px;
+
+    border-radius: 10px;
+    background-color: #ccc;
+}
+
+.feedback-input {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 20px;
+
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 13px 13px 13px 54px;
+
+    color: #3c3c3c;
+    border: 3px solid rgba(0,0,0,0);
+    border-radius: 0;
+    background-color: #fbfbfb;
+
+        -ms-box-sizing: border-box;
+}
+
+.feedback-input:focus {
+    padding: 13px 13px 13px 54px;
+
+    color: #3498db;
+    border: 3px solid #3498db;
+    outline: none;
+    background: #fff;
+    box-shadow: 0;
+}
+
+.focused {
+    color: #30aed6;
+    border: #30aed6 solid 3px;
+}
+
+/* Icons ---------------------------------- */
+
+
+
+#comment {
+    background-image: url(http://rexkirby.com/kirbyandson/images/comment.svg);
+    background-repeat: no-repeat;
+    background-position: 11px 8px;
+    background-size: 30px 30px;
+}
+
+textarea {
+    line-height: 150%;
+
+    width: 100%;
+    height: 150px;
+
+    resize: vertical;
+}
+
+input:hover,
+textarea:hover,
+input:focus,
+textarea:focus {
+    background-color: white;
+}
+
+#button-blue {
+    font-size: 19px;
+    font-weight: 300;
+
+    float: left;
+
+    width: 100%;
+    margin-top: -4px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+
+    cursor: pointer;
+    -webkit-transition: all .3s;
+       -moz-transition: all .3s;
+            transition: all .3s;
+
+    color: white;
+    border: #fbfbfb solid 4px;
+    background-color: #000;
+}
+
+#button-blue:hover {
+    color: #000;
+    background-color: rgba(0,0,0,0);
+}
+
+.submit:hover {
+    color: #3498db;
+}
+
+.ease {
+    width: 0;
+    height: 50px;
+
+    -webkit-transition: .3s ease;
+       -moz-transition: .3s ease;
+        -ms-transition: .3s ease;
+         -o-transition: .3s ease;
+            transition: .3s ease;
+
+    background-color: #fbfbfb;
+}
+
+.submit:hover .ease {
+    width: 100%;
+
+    background-color: white;
+}
+

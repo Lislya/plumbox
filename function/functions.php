@@ -276,11 +276,13 @@ function getOrder($uid) {
                     $sql = "SELECT name_product, price_s FROM product WHERE id_product = '$id_product'";
                     if ($result_set2 = $conn->query($sql)) {
                         $row = $result_set2->fetch_assoc();
-                        $list[$rows['id_order']]['product'][$row['name_product']]['price']= $row['price_s'];
+                        $list[$rows['id_order']]['product'][$row['name_product']]['price'] = $row['price_s'];
                         $list[$rows['id_order']]['product'][$row['name_product']]['quantity'] = $rows1['quantity'];
-                    } $result_set2->free();
+                    }
+                    $result_set2->free();
                 }
-            } $result_set1->free();
+            }
+            $result_set1->free();
         }
         $result_set->free();
     }

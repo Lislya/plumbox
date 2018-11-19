@@ -1,56 +1,79 @@
 
 .dialog_state {
-  max-width: 30px;
-  height: 30px;
+    max-width: 30px;
+    height: 30px;
 }
-#dialog{
-  transition-delay:0s;
-  height: 100%;
-  opacity: 1;
-  visibility: visible;
+#dialog {
+    z-index: 10;
+    visibility: visible;
+
+    height: 100%;
+
+    transition-delay: 0s;
+
+    opacity: 1;
 }
 
-#dialog, #dlg-wrap {
-  max-height: 24rem;
-  opacity: 1;
-  padding: 2rem;
+#dialog,
+#dlg-wrap {
+    max-height: 24rem;
+
+    opacity: 1;
 }
 .dlg-wrap {
-  position: absolute;
-  z-index: 1;
-  display: block;
-  box-sizing: border-box;
-  margin: 0 auto;
-  top: 50%;
-  right: -20%;
-  transform: translateY(-50%);
-  width: 400px;
-  padding: 2rem;
-  border-radius: 0.25rem;
-  background: #fff;
-  box-shadow: 1px 1px 6px rgba(0,0,0,0.3);
-  max-height: 0;
-  opacity: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-  overflow: hidden;
-  transition: all .5s;
+    position: absolute;
+    z-index: 10;
+    top: 34%;
+    right: 38%;
+
+    display: block;
+    overflow: hidden;
+
+    box-sizing: border-box;
+    width: 400px;
+    max-height: 0;
+    margin: 0 auto;
+
+    transition: all .5s;
+    transform: translateY(-50%);
+
+    opacity: 0;
+    border-radius: .25rem;
+    background: #fff;
+    box-shadow: 1px 1px 6px rgba(0,0,0,.3);
+}
+
+.dlg-wrap p{
+    margin: 0 1em 1em 1em;
+}
+.dlg-wrap p:first-child{
+    margin-top: 1em;
 }
 #dlg-close {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 2rem;
-  height: 2rem;
-  line-height: 2rem;
-  text-align: center;
-  cursor: pointer;
+    font-size: 1.5em;
+    line-height: 2rem;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 2rem;
+    height: 2rem;
+
+    cursor: pointer;
+    text-align: center;
 }
 
 .dlg-content {
-  color: #000;
-  font-weight: 300;
-  font-family: "Lato", sans-serif;
-  letter-spacing: 0.015em;
-  z-index: 5;
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+
+    z-index: 5;
+
+    display: flex;
+    flex-direction: column;
+
+    letter-spacing: .015em;
+
+    color: #000;
 }

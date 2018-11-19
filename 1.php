@@ -9,7 +9,10 @@
 <head>
     <meta charset="UTF-8">
     <title>PlumBox</title>
+
     <link rel="stylesheet" type="text/css" href="bower_components/popup/css/popup.css">
+    <link rel="stylesheet" type="text/css" href="css/1.css">
+
     <!-- index.php style sheet -->
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/catalog.css">
@@ -19,13 +22,13 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-grid.min.css">
-<!--    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">-->
+    <!--    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">-->
 
 
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <!-- Include jQuery lib -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
-<!--    <script src="bower_components/popup/js/popup.js"></script>-->
+    <!--    <script src="bower_components/popup/js/popup.js"></script>-->
 
 </head>
 <body>
@@ -104,31 +107,34 @@
                 </ul>
             </div>
 
-            <div class="col-9 main_area" style="display: flex; flex-wrap: wrap;">
-                <div class="col-sm-2 layout"><p>ID Order</p></div>
-                <div class="col-sm-2 layout"><p>STATUS</p></div>
-                <div class="col-sm-2 layout"><p>DELIVERY</p></div>
-                <div class="col-sm-2 layout"><p>DATE</p></div>
-                <div class="col-sm-3 layout"><p>SHOW PRODUCTS</p></div>
+            <div class="col-9 ">
 
-                <div class="col-sm-2 order"><p>1</p></div>
-                <div class="col-sm-2 order"><p>Shipped</p></div>
-                <div class="col-sm-2 order"><p>1</p></div>
-                <div class="col-sm-2 order"><p>2018-11-17 04:19:00</p></div>
 
-                <div class="col-sm-3 order"><button type="button" class="dialog_state button"></button></div>
-                <div class="dialog">
-                    <div class="dlg-wrap">
-                        <label id="dlg-close"  for="dialog_state"><i>×</i></label>
-                        <div id='dlg-content' class="dlg-content">ZHOPAZHOPAZHOPA</div>
+                <div id="form-main">
+                    <div id="form-div">
+                        <form class="form" id="form1">
+
+                            <p class="name">
+                                <input name="name" type="text" class="feedback-input" placeholder="Name" id="name" />
+                            </p>
+
+                            <p class="email">
+                                <input name="email" type="email" class="feedback-input" id="email" placeholder="Email" />
+                            </p>
+
+                            <p class="text">
+                                <textarea name="text" class="feedback-input" id="comment" placeholder="Comment"></textarea>
+                            </p>
+
+                            <div class="submit">
+                                <input type="submit" value="SEND" id="button-blue"/>
+                                <div class="ease"></div>
+                            </div>
+                        </form>
                     </div>
+
+
                 </div>
-
-
-            </div>
-
-
-
 
 
 </main>
@@ -153,9 +159,13 @@
     $(document).ready(function () {
 
         $('.dialog_state').click(function () {
-            $('.dialog').attr('id','dialog');
-            $('.dlg-wrap').attr('id','dlg-wrap');
+            $('.dialog').attr('id', 'dialog');
+            $('.dlg-wrap').attr('id', 'dlg-wrap');
         });
+        $('#dlg-close').click(function () {
+            $('.dialog').removeAttr('id');
+            $('.dlg-wrap').removeAttr('id');
+        })
     });
 </script>
 <script src="js/account.js"></script>
