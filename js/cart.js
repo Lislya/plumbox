@@ -52,6 +52,7 @@ function loadCart() {
         out += '<div class="alert alert-danger" role="alert">Cart is empty</div>';
         $('.cart').html(out);
     }
+
 }
 
 
@@ -92,23 +93,29 @@ function showCart(data) {
                         sum = cart[id].num * cart[id].price;
                         cartSum += sum;
                     }
+                    out += '<div class="bottombar-cart">';
+                    out += '<div class="col-3 promo"><label for="promocode" class="promocode">Promocode: </label>' +
+                        '<input type="text" name="promocode" id="promocode" class="signup-input">' +
+                        '<div class="alert" id="alert-promo" style="display: none;" role="alert"></div></div>';
                     if (sessionUser === '') {
                         //if user is not logged in then show buy button
-                        out += ' <button class="buy-btn book-btn btn-outline-success btn-lg" type="button" data-toggle="modal" data-target="#order">BUY</button>  ';
+                        out += ' <button class="buy-btn book-btn btn-outline-success btn-lg" id="btn-buy" type="button" data-toggle="modal" data-target="#order">BUY</button>  ';
                     } else {
                         //if user is  logged in then show book button
-                        out += ' <button class="book-btn btn-outline-success btn-lg ">BOOK</button>';
+                        out += ' <button class="book-btn btn-outline-success btn-lg "id="btn-book">BOOK</button>';
                     }
                     out += '<div class="cart-sum alert alert-dark alert-link" ">\n' +
-                        '        <span class="spincrement"></span><span> ₽</span>\n' +
+                        '        <span class="spincrement" data-cartSum="'+cartSum+'""></span><span> ₽</span>\n' +
                         '         </div>';
+                    out += '</div>';
+
                     $('.cart').html(out);
                     $('#cart-widget').addClass('cart-widget').html(count);
                     $('.remove-btn').on('click', delProd); //delete product num
                     $('.plus-btn').on('click', plusProd); // iterate product num
                     $('.minus-btn').on('click', minusProd); //decrease product num
-                    $('.buy-btn').on('click', showPopup); // show instant order checkout window
-                    $('.book-btn').on('click',bookProd); //book products
+                    $('#btn-buy').on('click', showPopup); // show instant order checkout window
+                    $('#btn-book').on('click', bookProd); //book products
                     $(".spincrement").spincrement({
                         from: 0,                // Стартовое число
                         to: cartSum,            // Итоговое число. Если false, то число будет браться из элемента с классом spincrement, также сюда можно напрямую прописать число. При этом оно может быть, как целым, так и с плавающей запятой
@@ -117,6 +124,7 @@ function showCart(data) {
                         thousandSeparator: " ", // Разделитель тыcячных
                         duration: 1000          // Продолжительность анимации в миллисекундах
                     });
+                    promoCheck();
                 }
             });
         }
@@ -164,10 +172,10 @@ function showPopup() {
         url: "function/core.php",
         data: {action: "getShop"},
         success: function (response) {
-            let shopName= JSON.parse(response);
+            let shopName = JSON.parse(response);
             let out = '';
-            for (let i=0;i<shopName.length;i++){
-                out += '<option value="'+i+'">'+shopName[i]+'</option>';
+            for (let i = 0; i < shopName.length; i++) {
+                out += '<option value="' + i + '">' + shopName[i] + '</option>';
             }
             $('#pickup').html(out);
         }
@@ -175,7 +183,28 @@ function showPopup() {
 }
 
 function bookProd() {
-    
+    // book order for logged user
+    function hide() {
+        $('#bookProd').hide();
+        // localStorage.clear();
+        // location.reload();
+    }
+    let order = {};
+    for (let id in cart) {
+        order[id] = {};
+        order[id].price = cart[id].price;
+        order[id].num = cart[id].num;
+    }
+    order.discount = $('#promocode').val();
+    order = JSON.stringify(order);
+    $.post({
+        url: "function/core.php",
+        data: {action: "bookProd", order: order},
+        success: function () {
+            $('#bookProd').html('Your order was booked successfully. You can manage it in your Order List').css('display', 'block');
+            setTimeout(hide, 5000);
+        }
+    });
 }
 
 function saveToCart() {
@@ -205,6 +234,25 @@ function isEmpty(object) {
     return false;
 }
 
+function promoCheck() {
+    $('#promocode').change(function () {
+        let promo = $(this).val();
+        $.ajax({
+            url: "function/core.php",
+            data: {action: 'promoCheck', promo: promo},
+            success: function (response) {
+                if (response == 0) {
+                    $('#alert-promo').html('×').css('display', 'block').addClass('alert-danger').removeClass('alert-success');
+                    setTimeout(showCart,5000,localStorage.getItem('cart'));
+                } else {
+                    $('#alert-promo').html(response * 100 + '%').css('display', 'block').addClass('alert-success').removeClass('alert-danger');
+                    cartSum = $('.spincrement').attr('data-cartSum')* (1 - response);
+                    $('.spincrement').html(cartSum);
+                }
+            }
+        });
+    });
+}
 
 $(document).ready(function () {
     loadCart();

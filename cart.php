@@ -61,6 +61,7 @@
     </header>
     <main>
         <!--        Main cart       -->
+        <div class="alert alert-success" role="alert" id="bookProd" style="display: none    ;"></div>
         <div class="cart"></div>
         <!--            Pop-up window with customer information input   -->
         <div id="order" class="modal fade">

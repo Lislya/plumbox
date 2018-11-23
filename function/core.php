@@ -24,6 +24,16 @@ switch ($action) {
     case 'getShop':
         getShop();
         break;
+    case 'promoCheck':
+        if (isset($_REQUEST['promo'])){
+            promoCheck($_REQUEST['promo']);
+        }
+        break;
+    case 'bookProd':
+        if (isset($_REQUEST['order'])){
+            bookProd($_REQUEST['order']);
+        }
+        break;
     case 'uPersonal':
         if (isset($_REQUEST['uid'])) {
             getPersonal($_REQUEST['uid']);
@@ -37,5 +47,8 @@ switch ($action) {
     case 'uSettings':
         break;
     case 'uSupport':
+        if (isset($_REQUEST['data'])){
+            sendMessage($_REQUEST['data']);
+        }
         break;
 }

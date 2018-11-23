@@ -191,6 +191,38 @@ function randomProd($id) {
     $conn->close();
 }
 
+function promoCheck($promo){
+    // ajax promocode validation in cart.php/js
+    $conn = connect();
+    $sql = "SELECT value FROM discount WHERE code='$promo'";
+    if ($result_set = $conn->query($sql)){
+        if ($result_set->num_rows==0){
+            echo 0;
+        } else {
+            $row = $result_set->fetch_assoc();
+            $value = $row['value'];
+            echo $value;
+        }
+    }
+}
+
+function bookProd($order) {
+    // Book order in cart.php for logged user
+    $conn = connect();
+    $product_list = json_decode($order);
+    if (json_last_error() === JSON_ERROR_NONE) {
+        foreach ($product_list as $id => $val) {
+            $price = $product_list->$id->{"price"};
+            $num = $product_list->$id->{"num"};
+            $sql = "UPDATE product SET booked = booked + '$num' WHERE id_product = '$id'";
+            if (!$result = $conn->query($sql)) {
+                die ("Error: " . $conn->error);
+            }
+        }
+        echo $product_list->{'discount'};
+    }
+}
+
 function getShop() {
     //get shops information
     $shopName = array();
@@ -288,4 +320,9 @@ function getOrder($uid) {
     }
     echo json_encode($list, JSON_NUMERIC_CHECK | JSON_UNESCAPED_UNICODE);
     $conn->close();
+}
+
+function sendMessage($message) {
+    //send feedback message grom account.php
+
 }

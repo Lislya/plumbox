@@ -23,6 +23,7 @@ $("#username").change(function(){
 	var resUsername = username.search(mask);
 	if (resUsername === -1){
 		$("#alert_username").hide().text("Incorrect username").css("display","block");
+        $('.button-signup').attr('disabled','disabled');
 	} else{
 		$.ajax({
 			url: "function/regCheck.php",
@@ -54,6 +55,7 @@ $("#email").change(function(){
 	var resEmail = email.search(mask);
 	if (resEmail === -1){
 		$("#alert_email").hide().text("Incorrect mail").css("display","block");
+        $('.button-signup').attr('disabled','disabled');
 	} else{
 		$.ajax({
 			url: "function/regCheck.php",
@@ -78,15 +80,33 @@ $("#email").keyup(function(){
 });
 
 //Password and repass checking
+$('#password').keyup(function () {
+    let pattern = /^[a-zA-Z0-9_][a-zA-Z0-9-_\.]{5,20}$/g;
+    let pass = $(this).val();
+    let resPass = pass.search(pattern);
+    if (resPass === -1){
+        $('#alert_password').text('Password minimal length is 6 with no special chars').css('display','block');
+        $('.button-signup').attr('disabled','disabled');
+    } else{
+        $('#alert_password').text("").hide();
+        $('.button-signup').removeAttr('disabled');
+
+    }
+    if(pass===''){
+        $('#alert_password').text('').hide();
+        $('.button-signup').removeAttr('disabled');
+    }
+});
+
 $("#repassword").keyup(function(){
 	var pass = $("#password").val();
 	var repass = $(this).val();
 	if (pass!=repass)
 	{
-		$("#alert_password").text("Passwords do not match").css('display','block');
+		$("#alert_repassword").text("Passwords do not match").css('display','block');
 		$('.button-signup').attr('disabled','disabled');
 	} else{
 		$('.button-signup').removeAttr('disabled');
-		$('#alert_password').text("").hide();
+		$('#alert_repassword').text("").hide();
 	}
 });

@@ -60,11 +60,12 @@
 				</div>
 				<div class="form-item">
 					<input type="password" name="password" id="password" class="signup-input" required>
+                    <div class="alert alert-danger" id="alert_password" role="alert" style="display: none;"></div>
 					<label for="password" class="signup-label">Password</label>
 				</div>
 				<div class="form-item">
 					<input type="password" name="repassword" id="repassword" class="signup-input" required>
-					<div class="alert alert-danger" id="alert_password" role="alert" style="display: none;"></div>
+					<div class="alert alert-danger" id="alert_repassword" role="alert" style="display: none;"></div>
 					<label for="repassword" class="signup-label">Re-enter password</label>
 				</div>
 				<div class="checkbox">
