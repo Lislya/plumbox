@@ -14,7 +14,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
             $_SESSION['role'] = $row['id_role']; //add id_role to session array
 
             $smsg = "You're logged in";
-            header("refresh: 2; /index.php");
+            header("refresh: 2; ./index.php");
         } else {
             $fmsg = "Wrong username or password";
         }

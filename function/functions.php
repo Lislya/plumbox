@@ -191,12 +191,12 @@ function randomProd($id) {
     $conn->close();
 }
 
-function promoCheck($promo){
+function promoCheck($promo) {
     // ajax promocode validation in cart.php/js
     $conn = connect();
     $sql = "SELECT value FROM discount WHERE code='$promo'";
-    if ($result_set = $conn->query($sql)){
-        if ($result_set->num_rows==0){
+    if ($result_set = $conn->query($sql)) {
+        if ($result_set->num_rows == 0) {
             echo 0;
         } else {
             $row = $result_set->fetch_assoc();
@@ -209,17 +209,56 @@ function promoCheck($promo){
 function bookProd($order) {
     // Book order in cart.php for logged user
     $conn = connect();
-    $product_list = json_decode($order);
+
+    $product_list = json_decode($order); //decode order list
+
+    $addr_stat = 0;
     if (json_last_error() === JSON_ERROR_NONE) {
-        foreach ($product_list as $id => $val) {
-            $price = $product_list->$id->{"price"};
-            $num = $product_list->$id->{"num"};
-            $sql = "UPDATE product SET booked = booked + '$num' WHERE id_product = '$id'";
-            if (!$result = $conn->query($sql)) {
-                die ("Error: " . $conn->error);
+        $datestamp = date("Y-m-d H:i:s");
+        $promocode = $product_list->{'discount'};
+        $id_user = $product_list->{'uid'};
+
+        $sql = "SELECT addr_stat FROM user WHERE id_user ='$id_user'";
+        if ($result_set = $conn->query($sql)) {
+            $row = $result_set->fetch_assoc();
+            if ($row['addr_stat'] == 1) {
+                $addr_stat = 1;
             }
         }
-        echo $product_list->{'discount'};
+        $result_set->free();
+
+        $sql = "SELECT id_discount FROM discount WHERE code = '$promocode'";
+        if ($result_set = $conn->query($sql)) {
+            if ($result_set->num_rows==0){
+                $id_discount = 0;
+            } else{
+                $row = $result_set->fetch_assoc();
+                $id_discount = $row['id_discount'];
+            }
+        }
+        $result_set->free();
+
+        $sql = "INSERT INTO `order` VALUES (NULL,'$addr_stat',0,'$datestamp','$id_user','$id_discount')";
+        if (!$result_set = $conn->query($sql)) {
+            die ("ERROR: " . $conn->error);
+        }
+
+        $id_order = $conn->insert_id;
+        foreach ($product_list as $id => $val) {
+            if (is_object($product_list->$id)) {
+                $prod_id = $product_list->$id->{"prod_id"};
+                $num = $product_list->$id->{"num"};
+                $sql = "INSERT INTO `order_product` VALUES ('$id_order','$prod_id','$num')";
+                if (!$result = $conn->query($sql)) {
+                    die("Order_product Error: " . $conn->error);
+                }
+            }
+
+            $sql = "UPDATE product SET booked = booked + '$num' WHERE id_product = '$id'";
+            if (!$result = $conn->query($sql)) {
+                die ("Booking error: " . $conn->error);
+            }
+        }
     }
 }
 

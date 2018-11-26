@@ -21,6 +21,7 @@ li {
 
     text-decoration: none;
 }
+
 img {
     vertical-align: baseline !important;
 }
@@ -289,20 +290,24 @@ nav {
     margin-bottom: 0;
     padding-right: 9px;
 }
+
 .promo {
     right: 41px;
 
     max-width: 160px;
 }
+
 #promocode {
     width: 70%;
 }
 
 #alert-promo {
-    min-width: 30px;
+    min-width: 50px;
     min-height: 30px;
     margin-bottom: 0;
     padding: 0;
+    margin-left: 5px;
+    cursor: pointer;
 
     text-align: center;
 }
@@ -315,7 +320,6 @@ nav {
 
     text-align: center;
 }
-
 
 .cart-sum p {
     margin-bottom: 2px;
@@ -352,6 +356,7 @@ nav {
     align-content: flex-start;
     flex-wrap: wrap;
 }
+
 .layout {
     display: flex;
     align-items: center;
@@ -361,6 +366,7 @@ nav {
 
     border-bottom: 1px solid #000;
 }
+
 .order {
     display: flex;
     align-items: center;
@@ -377,13 +383,16 @@ nav {
     grid-template-columns: 256px 100px 200px;
     grid-template-rows: 16% 16% 16% 16% 16% 16%;
 }
+
 .item1 {
     grid-row: 1/5;
 }
+
 .item1 img {
     position: absolute;
     top: -20px;
 }
+
 .item2 {
     display: flex;
     align-items: center;
@@ -393,6 +402,7 @@ nav {
     grid-column: 2/3;
     grid-row: 1/2;
 }
+
 .item3 {
     display: flex;
     align-content: space-around;
@@ -403,6 +413,7 @@ nav {
     grid-column: 2/3;
     grid-row: 2/3;
 }
+
 .item4 {
     display: flex;
     align-items: center;
@@ -412,17 +423,20 @@ nav {
     grid-column: 2/3;
     grid-row: 3/5;
 }
+
 .item5 {
     text-align: center;
 
     grid-row: 5/6;
 }
+
 .item6 {
     margin-left: 10px;
 
     grid-column: 2/3;
     grid-row: 5/6;
 }
+
 .item7 {
     display: flex;
     align-items: center;
@@ -431,6 +445,7 @@ nav {
 
     grid-row: 1/2;
 }
+
 .item8 {
     display: flex;
     align-content: space-around;
@@ -440,6 +455,7 @@ nav {
 
     grid-row: 2/3;
 }
+
 .item9 {
     display: flex;
     align-items: center;
@@ -448,6 +464,7 @@ nav {
 
     grid-row: 3/5;
 }
+
 .item10 {
     margin-left: 10px;
 }
@@ -489,18 +506,18 @@ nav {
     line-height: 20px;
 
     -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     width: 100%;
     margin-bottom: 10px;
     padding: 13px 13px 13px 54px;
 
     color: #3c3c3c;
-    border: 3px solid rgba(0,0,0,0);
+    border: 3px solid rgba(0, 0, 0, 0);
     border-radius: 0;
     background-color: #fbfbfb;
 
-        -ms-box-sizing: border-box;
+    -ms-box-sizing: border-box;
 }
 
 .feedback-input:focus {
@@ -556,8 +573,8 @@ textarea:focus {
 
     cursor: pointer;
     -webkit-transition: all .3s;
-       -moz-transition: all .3s;
-            transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
 
     color: white;
     border: #fbfbfb solid 4px;
@@ -566,7 +583,7 @@ textarea:focus {
 
 #button-blue:hover {
     color: #000;
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .submit:hover {
@@ -578,10 +595,10 @@ textarea:focus {
     height: 50px;
 
     -webkit-transition: .3s ease;
-       -moz-transition: .3s ease;
-        -ms-transition: .3s ease;
-         -o-transition: .3s ease;
-            transition: .3s ease;
+    -moz-transition: .3s ease;
+    -ms-transition: .3s ease;
+    -o-transition: .3s ease;
+    transition: .3s ease;
 
     background-color: #fbfbfb;
 }
@@ -591,8 +608,6 @@ textarea:focus {
 
     background-color: white;
 }
-
-
 
 /*footer style*/
 

@@ -71,7 +71,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['name
             $fmsg = "Registration failed " . $connection->error;
         } else {
             $smsg = "Registration successful";
-            header("refresh: 3; login.php");
+            header("refresh: 3; ./login.php");
         }
     } else {
         $fmsg = "Registration failed. Incorrect values!";

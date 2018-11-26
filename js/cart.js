@@ -105,7 +105,7 @@ function showCart(data) {
                         out += ' <button class="book-btn btn-outline-success btn-lg "id="btn-book">BOOK</button>';
                     }
                     out += '<div class="cart-sum alert alert-dark alert-link" ">\n' +
-                        '        <span class="spincrement" data-cartSum="'+cartSum+'""></span><span> ₽</span>\n' +
+                        '        <span class="spincrement" data-cartSum="' + cartSum + '""></span><span> ₽</span>\n' +
                         '         </div>';
                     out += '</div>';
 
@@ -125,6 +125,7 @@ function showCart(data) {
                         duration: 1000          // Продолжительность анимации в миллисекундах
                     });
                     promoCheck();
+
                 }
             });
         }
@@ -186,25 +187,38 @@ function bookProd() {
     // book order for logged user
     function hide() {
         $('#bookProd').hide();
-        // localStorage.clear();
-        // location.reload();
+        localStorage.clear();
+        location.reload();
     }
+
     let order = {};
     for (let id in cart) {
-        order[id] = {};
-        order[id].price = cart[id].price;
-        order[id].num = cart[id].num;
+        order[id] = {}; //product id as an object
+        order[id].prod_id = parseInt(id);
+        order[id].num = cart[id].num; //product num
     }
-    order.discount = $('#promocode').val();
-    order = JSON.stringify(order);
+    order.discount = $('#promocode').val(); //order promocode
     $.post({
         url: "function/core.php",
-        data: {action: "bookProd", order: order},
-        success: function () {
-            $('#bookProd').html('Your order was booked successfully. You can manage it in your Order List').css('display', 'block');
-            setTimeout(hide, 5000);
+        data: {action: "getSession"},
+        success: function (response) {
+            order.uid = response; //get user id
+            order = JSON.stringify(order); //json file for server
+            $.post({
+                url: "function/core.php",
+                data: {action: "bookProd", order: order},
+                success: function () {
+                    $('#bookProd').html('Your order was booked successfully. You can manage it in your Order List').css('display', 'block');
+                    setTimeout(hide, 5000);
+                }
+            });
         }
     });
+
+}
+
+function checkOut() {
+    
 }
 
 function saveToCart() {
@@ -243,11 +257,15 @@ function promoCheck() {
             success: function (response) {
                 if (response == 0) {
                     $('#alert-promo').html('×').css('display', 'block').addClass('alert-danger').removeClass('alert-success');
-                    setTimeout(showCart,5000,localStorage.getItem('cart'));
+                    //reset cart if promo doesn't exist
+                    setTimeout(loadCart, 1000);
                 } else {
-                    $('#alert-promo').html(response * 100 + '%').css('display', 'block').addClass('alert-success').removeClass('alert-danger');
-                    cartSum = $('.spincrement').attr('data-cartSum')* (1 - response);
-                    $('.spincrement').html(cartSum);
+                    $('#alert-promo').html(response * 100 + '%').css('display', 'block').addClass('alert-success').removeClass('alert-danger')
+                        .on('click', function () {
+                            //count new sum with discount
+                            let cartSum = Math.ceil($('.spincrement').attr('data-CartSum') * (1 - response));
+                            $('.spincrement').html(cartSum);
+                        });
                 }
             }
         });

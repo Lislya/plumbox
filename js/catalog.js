@@ -93,4 +93,5 @@ $(document).ready(function () {
         }
     });
     loadMiniCart();
+    $('.add-to-cart').on('click', addToCart);
 });
