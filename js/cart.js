@@ -99,10 +99,15 @@ function showCart(data) {
                         '<div class="alert" id="alert-promo" style="display: none;" role="alert"></div></div>';
                     if (sessionUser === '') {
                         //if user is not logged in then show buy button
-                        out += ' <button class="buy-btn book-btn btn-outline-success btn-lg" id="btn-buy" type="button" data-toggle="modal" data-target="#order">BUY</button>  ';
+                        out += ' <button class="buy-btn book-btn btn-outline-success btn-lg"' +
+                            ' id="btn-buy" type="button" data-toggle="modal" data-target="#order">BUY</button>  ';
                     } else {
                         //if user is  logged in then show book button
+                        out += '<div class="buy-book-btn">';
                         out += ' <button class="book-btn btn-outline-success btn-lg "id="btn-book">BOOK</button>';
+                        out += ' <button class="buy-btn book-btn btn-outline-success btn-lg"' +
+                            ' id="btn-buy" type="button" data-toggle="modal" data-target="#order">BUY</button>  ';
+                        out += '</div>';
                     }
                     out += '<div class="cart-sum alert alert-dark alert-link" ">\n' +
                         '        <span class="spincrement" data-cartSum="' + cartSum + '""></span><span> ₽</span>\n' +
@@ -116,6 +121,7 @@ function showCart(data) {
                     $('.minus-btn').on('click', minusProd); //decrease product num
                     $('#btn-buy').on('click', showPopup); // show instant order checkout window
                     $('#btn-book').on('click', bookProd); //book products
+                    $('#checkout-btn').on('click', checkOut);
                     $(".spincrement").spincrement({
                         from: 0,                // Стартовое число
                         to: cartSum,            // Итоговое число. Если false, то число будет браться из элемента с классом spincrement, также сюда можно напрямую прописать число. При этом оно может быть, как целым, так и с плавающей запятой
@@ -175,22 +181,23 @@ function showPopup() {
         success: function (response) {
             let shopName = JSON.parse(response);
             let out = '';
-            for (let i = 0; i < shopName.length; i++) {
-                out += '<option value="' + i + '">' + shopName[i] + '</option>';
+            for (let id in shopName){
+                out += '<option value="'+id+'">'+shopName[id].name+'</option>';
             }
             $('#pickup').html(out);
         }
     });
 }
 
-function bookProd() {
-    // book order for logged user
-    function hide() {
-        $('#bookProd').hide();
-        localStorage.clear();
-        location.reload();
-    }
+function cartReset(elem) {
+    //reset cart after order is booked/bought
+    $(elem).hide();
+    localStorage.clear();
+    location.reload();
+}
 
+function bookProd() {
+    //product booking
     let order = {};
     for (let id in cart) {
         order[id] = {}; //product id as an object
@@ -208,8 +215,9 @@ function bookProd() {
                 url: "function/core.php",
                 data: {action: "bookProd", order: order},
                 success: function () {
-                    $('#bookProd').html('Your order was booked successfully. You can manage it in your Order List').css('display', 'block');
-                    setTimeout(hide, 5000);
+                    let out = 'Your order was booked successfully. You can manage it in your Order List'
+                    $('#bookProd').html(out).css('display', 'block');
+                    setTimeout(cartReset, 5000, '#bookProd');
                 }
             });
         }
@@ -218,7 +226,44 @@ function bookProd() {
 }
 
 function checkOut() {
-    
+    //checkout function for all users
+    $('#checkout-form').submit(function (e) {
+        e.preventDefault();
+
+        let order = {};
+        for (let id in cart) {
+            order[id] = {};
+            order[id].prod_id = parseInt(id);
+            order[id].num = cart[id].num = cart[id].num;
+        }
+        order.discount = $('#promocode').val();
+        if ($('#email').val() !== '') {
+            order.email = $('#email').val();
+            let addr_stat = document.getElementById('addr_stat');
+            if (addr_stat.checked) {
+                order.region = $('#region').val();
+                order.city = $('#city').val();
+                order.street = $('#street').val();
+                order.house = $('#house').val();
+                order.corp = $('#corp').val();
+                order.flat = $('#flat').val();
+                order.post_index = $('#post_index').val();
+            } else {
+                order.selfpickup = $('#pickup').val();
+            }
+            order = JSON.stringify(order);
+            $.post({
+                url: "function/core.php",
+                data: {action: "checkOut", order: order},
+                success: function () {
+                    console.log(order);
+                    out = 'Your order is processed! Check your email ('+$("#email").val()+') for more information';
+                    $('#checkAlert').html(out).css('display','block').removeClass('alert-danger').addClass('alert-success');
+                    setTimeout(cartReset, 5000, '#checkAlert');
+                }
+            });
+        }
+    });
 }
 
 function saveToCart() {

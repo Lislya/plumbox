@@ -11,6 +11,7 @@
     <title>PlumBox</title>
 
     <link rel="stylesheet" type="text/css" href="bower_components/popup/css/popup.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/1.css">
 
     <!-- index.php style sheet -->
@@ -64,80 +65,90 @@
 </header>
 
 <main>
-    <!-- grid setting -->
-    <div class="container">
-        <div class="row">
-            <!-- left navbar of account -->
-            <div class="col-sm">
-                <ul class="catalog">
-                    <!-- uPersonal means User Personal data -->
-                    <li data-option="uPersonal">
-                        <a class="catalog_item">
-								<span class="icon">
-									<img src="img/icon/user_icon.png" alt="">
-								</span>
-                            <span class="title">Personal Information</span>
-                        </a>
-                    </li>
-                    <li data-option="uOrder">
-                        <a class="catalog_item">
-								<span class="icon">
-									<img src="img/icon/order_icon.png" alt="">
-								</span>
-                            <span class="title">My Orders</span>
-                        </a>
-                    </li>
-                    <li data-option="uSettings">
-                        <a class="catalog_item">
-								<span class="icon">
-									<img src="img/icon/settings_icon.png" alt="">
-								</span>
-                            <span class="title">Settings</span>
-                        </a>
-                    </li>
-                    <li data-option="uSupport">
-                        <a class="catalog_item">
-								<span class="icon">
-									<img src="img/icon/support_icon.png" alt="">
-								</span>
-                            <span class="title">Help & Support</span>
-                        </a>
-                    </li>
+    <main>
+        <!--        Main cart       -->
+        <div class="alert alert-success" role="alert" id="bookProd" style="display: none    ;"></div>
+        <div class="cart"></div>
+        <!--            Pop-up window with customer information input   -->
+        <div id="order" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="spincrement"></h4><h4>&nbsp;₽</h4>
+                        <button class="close" type="button" data-dismiss="modal">×</button>
+                    </div>
+                    <div class="modal-body ">
+                        <form method="POST" action="function/checkout.php">
+                            <div class="form-item">
+                                <input type="email" name="email" id="email" class="signup-input" required>
+                                <div class="alert alert-danger" role="alert" id="alert_email"
+                                     style="display: none;"></div>
+                                <label for="email" class="signup-label">Email</label>
+                                <!--CC Widget-->
+                                <div id="cards">
+                                    <div id="front">
+                                        <a target="_blank" href="#" id="bank-link"></a>
+                                        <img src="" alt="" id="brand-logo">
+                                        <div id="front-fields">
+                                            <input class="field" id="number" type="text"
+                                                   placeholder="0000 0000 0000 0000">
+                                            <label class="label">Valid until</label>
+                                            <input class="field expired" id="mm" type="text" placeholder="MM">
+                                            <input class="field expired" id="yy" type="text" placeholder="YY">
+                                        </div>
+                                    </div>
+                                    <div id="back">
+                                        <input class="field" id="code" type="password" placeholder="">
+                                        <label id="code-label" class="label">CVV/CVC</label>
+                                    </div>
+                                </div>
+                            </div>
 
-                </ul>
-            </div>
+                            <div class="checkbox">
+                                <label for="addr_stat">Delivery address?</label>
 
-            <div class="col-9 ">
+                                <input type="checkbox" id="addr_stat" name="addr_stat" value="on"
+                                       onclick="ShowHide(this)">
 
+                                <select class="form-control" id="pickup">
 
-                <div id="form-main">
-                    <div id="form-div">
-                        <form class="form" id="form1">
+                                </select>
+                            </div>
+                            <div class="addr_input" id="addr_input">
+                                <div class="form-item_addr">
+                                    <input type="text" name="region" id="region" class="signup-input"
+                                           placeholder="Region">
+                                </div>
+                                <div class="form-item_addr">
+                                    <input type="text" name="city" id="city" class="signup-input" placeholder="City">
+                                </div>
+                                <div class="form-item_addr">
+                                    <input type="text" name="street" id="street" class="signup-input"
+                                           placeholder="Street">
+                                </div>
+                                <div class="form-item_addr">
+                                    <input type="text" name="house" id="house" class="signup-input" placeholder="House">
+                                </div>
+                                <div class="form-item_addr">
+                                    <input type="text" name="corp" id="corp" class="signup-input" placeholder="Corp">
+                                </div>
+                                <div class="form-item_addr">
+                                    <input type="text" name="flat" id="flat" class="signup-input" placeholder="Flat">
+                                </div>
+                                <div class="form-item_addr">
+                                    <input type="text" name="post_index" id="post_index" class="signup-input"
+                                           placeholder="Post Index">
+                                </div>
 
-                            <p class="name">
-                                <input name="name" type="text" class="feedback-input" placeholder="Name" id="name" />
-                            </p>
-
-                            <p class="email">
-                                <input name="email" type="email" class="feedback-input" id="email" placeholder="Email" />
-                            </p>
-
-                            <p class="text">
-                                <textarea name="text" class="feedback-input" id="comment" placeholder="Comment"></textarea>
-                            </p>
-
-                            <div class="submit">
-                                <input type="submit" value="SEND" id="button-blue"/>
-                                <div class="ease"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <input class="btn btn-success" type="submit" value="CHECKOUT">
                             </div>
                         </form>
                     </div>
-
-
                 </div>
-
-
-</main>
+            </div>
+    </main>
 
 <footer>
     <!-- Social -->
@@ -155,20 +166,9 @@
         <p>All rights reserved &copy; <?php echo date('Y'); ?> </p>
     </div>
 </footer>
-<script>
-    $(document).ready(function () {
 
-        $('.dialog_state').click(function () {
-            $('.dialog').attr('id', 'dialog');
-            $('.dlg-wrap').attr('id', 'dlg-wrap');
-        });
-        $('#dlg-close').click(function () {
-            $('.dialog').removeAttr('id');
-            $('.dlg-wrap').removeAttr('id');
-        })
-    });
-</script>
-<script src="js/account.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/signup.js"></script>
 
 </body>
 </html>

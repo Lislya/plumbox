@@ -286,6 +286,11 @@ nav {
     margin-top: 20px;
 }
 
+.buy-book-btn{
+    display: flex;
+    width: 63%;
+}
+
 .promocode {
     margin-bottom: 0;
     padding-right: 9px;
@@ -344,8 +349,11 @@ nav {
 
 #bookProd {
     left: 30%;
-
+    top: 40%;
+    position: fixed;
+    z-index: 100;
     width: 40%;
+    background-color: #d4edda;
 }
 
 /*style for select*/

@@ -55,6 +55,7 @@ $("#email").change(function(){
 	var resEmail = email.search(mask);
 	if (resEmail === -1){
 		$("#alert_email").hide().text("Incorrect mail").css("display","block");
+		$("#checkAlert").hide().text("Incorrect mail").css("display","block"); //for cart.php
         $('.button-signup').attr('disabled','disabled');
 	} else{
 		$.ajax({
@@ -73,10 +74,12 @@ $("#email").change(function(){
 	}
 	if (email==''){
 	$("#alert_email").hide().text("");
+	$("#checkAlert").hide().text("");
 	}
 });
 $("#email").keyup(function(){
 	$("#alert_email").hide().text("");
+	$("#checkAlert").hide().text("");
 });
 
 //Password and repass checking

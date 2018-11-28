@@ -266,10 +266,10 @@ function getShop() {
     //get shops information
     $shopName = array();
     $conn = connect();
-    $sql = "SELECT name_shop FROM shop";
+    $sql = "SELECT name_shop,id_shop FROM shop";
     if ($result_set = $conn->query($sql)) {
         while ($rows = $result_set->fetch_assoc()) {
-            $shopName[] = $rows['name_shop'];
+            $shopName[$rows['id_shop']]['name'] = $rows['name_shop'];
         }
     }
     $result_set->free();

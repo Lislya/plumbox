@@ -61,7 +61,7 @@
     </header>
     <main>
         <!--        Main cart       -->
-        <div class="alert alert-success" role="alert" id="bookProd" style="display: none    ;"></div>
+        <div class="alert alert-success modal-content" role="alert" id="bookProd" style="display: none    ;"></div>
         <div class="cart"></div>
         <!--            Pop-up window with customer information input   -->
         <div id="order" class="modal fade">
@@ -72,10 +72,10 @@
                         <button class="close" type="button" data-dismiss="modal">×</button>
                     </div>
                     <div class="modal-body ">
-                        <form method="POST" action="function/checkout.php">
+                        <form method="POST" id="checkout-form">
                             <div class="form-item">
                                 <input type="email" name="email" id="email" class="signup-input" required>
-                                <div class="alert alert-danger" role="alert" id="alert_email"
+                                <div class="alert alert-danger" role="alert" id="checkAlert"
                                      style="display: none;"></div>
                                 <label for="email" class="signup-label">Email</label>
                                 <!--CC Widget-->
@@ -136,7 +136,7 @@
 
                             </div>
                             <div class="modal-footer">
-                                <input class="btn btn-success" type="submit" value="CHECKOUT">
+                                <input class="btn btn-success" type="submit" id="checkout-btn" value="CHECKOUT">
                             </div>
                         </form>
                     </div>
