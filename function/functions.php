@@ -194,6 +194,7 @@ function randomProd($id) {
 function promoCheck($promo) {
     // ajax promocode validation in cart.php/js
     $conn = connect();
+    $promo = trim($promo);
     $sql = "SELECT value FROM discount WHERE code='$promo'";
     if ($result_set = $conn->query($sql)) {
         if ($result_set->num_rows == 0) {
@@ -204,6 +205,28 @@ function promoCheck($promo) {
             echo $value;
         }
     }
+}
+
+function quantityCheck($ord) {
+    //check if there is no such quantity if prod in the store
+    $conn = connect();
+    $order = json_decode($ord);
+
+    if (json_last_error() == JSON_ERROR_NONE) {
+        $error = 0;
+        foreach ($order as $id => $val) {
+            $id_prod = $order->$id->{'prod_id'};
+            $num = $order->$id->{'num'};
+            $sql = "SELECT quantity,booked FROM product WHERE id_product='$id_prod'";
+            if ($result_set = $conn->query($sql)) {
+                $row = $result_set->fetch_assoc();
+                if ($row['quantity'] < ($row['booked'] + $num)) {
+                    $error = 1;
+                }
+            } else echo "Error: " . $conn->error;
+        }
+        echo $error;
+    } else die("JSON Error");
 }
 
 function bookProd($order) {
@@ -229,9 +252,9 @@ function bookProd($order) {
 
         $sql = "SELECT id_discount FROM discount WHERE code = '$promocode'";
         if ($result_set = $conn->query($sql)) {
-            if ($result_set->num_rows==0){
+            if ($result_set->num_rows == 0) {
                 $id_discount = 0;
-            } else{
+            } else {
                 $row = $result_set->fetch_assoc();
                 $id_discount = $row['id_discount'];
             }
@@ -240,6 +263,7 @@ function bookProd($order) {
 
         $sql = "INSERT INTO `order` VALUES (NULL,'$addr_stat',0,'$datestamp','$id_user','$id_discount')";
         if (!$result_set = $conn->query($sql)) {
+            echo 0;
             die ("ERROR: " . $conn->error);
         }
 
@@ -250,16 +274,136 @@ function bookProd($order) {
                 $num = $product_list->$id->{"num"};
                 $sql = "INSERT INTO `order_product` VALUES ('$id_order','$prod_id','$num')";
                 if (!$result = $conn->query($sql)) {
+                    echo 0;
                     die("Order_product Error: " . $conn->error);
                 }
             }
 
             $sql = "UPDATE product SET booked = booked + '$num' WHERE id_product = '$id'";
             if (!$result = $conn->query($sql)) {
+                echo 0;
                 die ("Booking error: " . $conn->error);
             }
         }
+        echo 1; // successful booking
+    } else echo 0; //unsuccessful booking
+}
+
+function checkOut($ord) {
+    $conn = connect();
+    $order = json_decode($ord);
+    function clean($string) {
+        $conn = connect();
+        return $conn->real_escape_string(htmlspecialchars(strip_tags(stripslashes(trim($string)))));
     }
+
+    if (json_last_error() === JSON_ERROR_NONE) {
+        $timestamp = date("Y-m-d H:i:s"); //timestamp of order
+        $promocode = clean($order->{'discount'}); //promocode name
+
+        $sql = "SELECT id_discount FROM discount WHERE code='$promocode'"; //find id_discount
+        if ($result_set = $conn->query($sql)) {
+            if ($result_set->num_rows == 0) {
+                $id_dicount = 0;
+            } else {
+                $row = $result_set->fetch_assoc();
+                $id_dicount = $row['id_discount'];
+            }
+        } else die ("Error1: " . $conn->error);
+
+        if (isset($_SESSION['id_user'])) {
+            //if user is logged in
+            $uid = $_SESSION['id_user'];
+
+            if ($order->{'addr_stat'} == TRUE) {
+                //if user mentioned new address for his order
+                $delivery_status = 1;
+                //update the order table
+                $sql = "INSERT INTO `order` VALUES (NULL,'$delivery_status',1,'$timestamp','$uid','$id_dicount')";
+                if (!$result = $conn->query($sql)) {
+                    echo "Error2: " . $conn->error;
+                    die;
+                }
+                $id_order = $conn->insert_id;
+                //update address table with new address-order bond
+                $region = clean($order->{'region'});
+                $city = clean($order->{'city'});
+                $street = clean($order->{'street'});
+                $house = clean($order->{'house'});
+                $corp = clean($order->{'corp'});
+                $flat = clean($order->{'flat'});
+                $post_index = clean($order->{'post_index'});
+                $sql = "INSERT INTO address VALUES (null,'$region','$city','$street','$house','$corp','$flat','$post_index',null ,'$id_order')";
+                if (!$result = $conn->query($sql)) {
+                    echo "Error3: " . $conn->error;
+                    die;
+                }
+            } else {
+                $delivery_status = 0;
+
+                $sql = "INSERT INTO `order` VALUES (NULL, '$delivery_status',1,'$timestamp','$uid','$id_dicount')";
+                if (!$result = $conn->query($sql)) {
+                    echo "Error4: " . $conn->error;
+                    die;
+                }
+                $id_order = $conn->insert_id;
+            }
+        } else { //if anon user
+            if ($order->{'addr_stat'} == TRUE) {
+                //if user mentioned address for his order
+                $delivery_status = 1;
+                //update the order table
+                $sql = "INSERT INTO `order` VALUES (NULL,'$delivery_status',1,'$timestamp',null,'$id_dicount')";
+                if (!$result = $conn->query($sql)) {
+                    echo "Error5: " . $conn->error;
+                    die;
+                }
+                $id_order = $conn->insert_id;
+                //update address table with new address-order bond
+                $region = clean($order->{'region'});
+                $city = clean($order->{'city'});
+                $street = clean($order->{'street'});
+                $house = clean($order->{'house'});
+                $corp = clean($order->{'corp'});
+                $flat = clean($order->{'flat'});
+                $post_index = clean($order->{'post_index'});
+                $sql = "INSERT INTO address VALUES (null,'$region','$city','$street','$house','$corp','$flat','$post_index',null ,'$id_order')";
+                if (!$result = $conn->query($sql)) {
+                    echo "Error6: " . $conn->error;
+                    die;
+                }
+            } else {
+                $delivery_status = 0;
+
+                $sql = "INSERT INTO `order` VALUES (NULL, '$delivery_status',1,'$timestamp',null ,'$id_dicount')";
+                if (!$result = $conn->query($sql)) {
+                    echo "Error7: " . $conn->error;
+                    die;
+                }
+                $id_order = $conn->insert_id;
+            }
+        }
+
+        // update order-product and product tables
+        foreach ($order as $id => $val) {
+            if (is_object($order->$id)) {
+                $id_prod = $order->$id->{'prod_id'};
+                $num = $order->$id->{'num'};
+                $sql = "INSERT INTO order_product VALUES ('$id_order','$id_prod','$num')";
+                if (!$result = $conn->query($sql)) {
+                    echo "Error8: " . $conn->error;
+                    die;
+                }
+                $sql = "UPDATE product SET quantity=quantity-'$num' WHERE id_product='$id_prod'";
+                if (!$result = $conn->query($sql)) {
+                    echo "Error9: " . $conn->error;
+                    die;
+                }
+            }
+        }
+
+        echo 1; //successful buying
+    } else echo 0; //unsuccessful buying
 }
 
 function getShop() {
@@ -359,6 +503,63 @@ function getOrder($uid) {
     }
     echo json_encode($list, JSON_NUMERIC_CHECK | JSON_UNESCAPED_UNICODE);
     $conn->close();
+}
+
+function checkSum($id_order) {
+    //get Sum of the booked order account.php
+    $conn = connect();
+    $sum = 0;
+    $id_order = $conn->real_escape_string($id_order);
+    $product_list = array();
+    $price_list = array();
+    $quantity_list = array();
+
+    $sql = "SELECT `value` FROM discount WHERE id_discount IN (SELECT id_discount FROM `order` WHERE id_order='$id_order')";
+    if ($result_set = $conn->query($sql)) {
+        if ($result_set->num_rows == 0) {
+            $discount = 0;
+        } else {
+            $row = $result_set->fetch_assoc();
+            $discount = $row['value'];
+        }
+    }
+    $result_set->free();
+
+    $sql = "SELECT id_product, quantity FROM order_product WHERE id_order='$id_order'";
+    if ($result_set = $conn->query($sql)) {
+        while ($rows = $result_set->fetch_assoc()) {
+            $product_list[] = $rows['id_product'];
+            $quantity_list[] = $rows['quantity'];
+        }
+    } else {
+        echo "Error: " . $conn->error;
+        die;
+    }
+    $result_set->free();
+    for ($i = 0; $i < count($product_list); $i++) {
+        $sql = "SELECT price_s FROM product WHERE id_product=" . "$product_list[$i]";
+        if ($result_set = $conn->query($sql)) {
+            $row = $result_set->fetch_assoc();
+            $price_list[] = $row['price_s'];
+        } else {
+            echo "Error: " . $conn->error;
+            die;
+        }
+    }
+    for ($i = 0; $i < count($product_list); $i++) {
+        $sum += $quantity_list[$i] * $price_list[$i];
+    }
+    $sum = ceil($sum*(1-$discount));
+    echo $sum;
+}
+
+function payment($id_order){
+    //change order status to "Shipped" in account.php after payment
+    $conn = connect();
+    $sql = "UPDATE `order` SET order_stat=1 WHERE id_order='$id_order'";
+    if (!$result = $conn->query($sql)){
+        echo 0;
+    } else echo 1; //success
 }
 
 function sendMessage($message) {

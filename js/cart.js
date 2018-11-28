@@ -52,7 +52,6 @@ function loadCart() {
         out += '<div class="alert alert-danger" role="alert">Cart is empty</div>';
         $('.cart').html(out);
     }
-
 }
 
 
@@ -131,7 +130,7 @@ function showCart(data) {
                         duration: 1000          // Продолжительность анимации в миллисекундах
                     });
                     promoCheck();
-
+                    quantityCheck();
                 }
             });
         }
@@ -181,8 +180,8 @@ function showPopup() {
         success: function (response) {
             let shopName = JSON.parse(response);
             let out = '';
-            for (let id in shopName){
-                out += '<option value="'+id+'">'+shopName[id].name+'</option>';
+            for (let id in shopName) {
+                out += '<option value="' + id + '">' + shopName[id].name + '</option>';
             }
             $('#pickup').html(out);
         }
@@ -194,6 +193,34 @@ function cartReset(elem) {
     $(elem).hide();
     localStorage.clear();
     location.reload();
+}
+
+function quantityCheck() {
+    //check product quantity
+    let order = {};
+    for (let id in cart) {
+        order[id] = {};
+        order[id].prod_id = parseInt(id);
+        order[id].num = cart[id].num;
+    }
+    order = JSON.stringify(order);
+    console.log(order);
+    $.ajax({
+        url: "function/core.php",
+        type: "POST",
+        data: {action: "quantityCheck", order: order},
+        success: function (response) {
+            if (response == 1) {
+                let out = 'Unfortunately, there is no such quantity of products';
+                out += '<button class="close" type="button" data-dismiss="modal">×</button>';
+                $('#bookProd').html(out)
+                    .css('display', 'block').css('background-color','#f8d7da')
+                    .css('color','#721c24').modal().css('z-index','1050');
+            } else{
+                $('#bookProd').html('').hide();
+            }
+        }
+    });
 }
 
 function bookProd() {
@@ -214,10 +241,17 @@ function bookProd() {
             $.post({
                 url: "function/core.php",
                 data: {action: "bookProd", order: order},
-                success: function () {
-                    let out = 'Your order was booked successfully. You can manage it in your Order List'
-                    $('#bookProd').html(out).css('display', 'block');
-                    setTimeout(cartReset, 5000, '#bookProd');
+                success: function (e) {
+                    let out = '';
+                    if (e == 1) {
+                        out = 'Your order was booked successfully. You can manage it in your Order List';
+                        $('#bookProd').html(out).css('display', 'block');
+                        setTimeout(cartReset, 5000, '#bookProd');
+                    } else {
+                        out = 'Booking failed! Something went wrong. Try again!';
+                        $('#bookProd').html(out).css('display', 'block');
+                        setTimeout(cartReset, 5000, '#bookProd');
+                    }
                 }
             });
         }
@@ -241,6 +275,7 @@ function checkOut() {
             order.email = $('#email').val();
             let addr_stat = document.getElementById('addr_stat');
             if (addr_stat.checked) {
+                order.addr_stat = true;
                 order.region = $('#region').val();
                 order.city = $('#city').val();
                 order.street = $('#street').val();
@@ -249,17 +284,19 @@ function checkOut() {
                 order.flat = $('#flat').val();
                 order.post_index = $('#post_index').val();
             } else {
+                order.addr_stat = false;
                 order.selfpickup = $('#pickup').val();
             }
             order = JSON.stringify(order);
             $.post({
                 url: "function/core.php",
                 data: {action: "checkOut", order: order},
-                success: function () {
-                    console.log(order);
-                    out = 'Your order is processed! Check your email ('+$("#email").val()+') for more information';
-                    $('#checkAlert').html(out).css('display','block').removeClass('alert-danger').addClass('alert-success');
-                    setTimeout(cartReset, 5000, '#checkAlert');
+                success: function (e) {
+                    if (e == 1) {
+                        out = 'Your order is processed! Check your email (' + $("#email").val() + ') for more information';
+                        $('#checkAlert').html(out).css('display', 'block').removeClass('alert-danger').addClass('alert-success');
+                        setTimeout(cartReset, 5000, '#checkAlert');
+                    }
                 }
             });
         }

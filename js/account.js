@@ -1,6 +1,38 @@
 var uid = '';
 var menu = '';
 
+$(function () {
+    //Credit Card Widget
+    var $front = $('#front'); // front side of the CC
+    var $bankLink = $('#bank-link'); // backside of the CC
+    var $brandLogo = $('#brand-logo'); //logo of payment system | VISA, MASTERCARD
+    var $number = $('#number'); // CC number
+    var $code = $('#code'); // CVV|CVC
+    $number.on('keyup change paste', function () {
+        var cardInfo = new CardInfo($number.val()); //CardInfo Object
+        if (cardInfo.bankUrl) {
+            $bankLink
+                .attr('href', cardInfo.bankUrl)
+                .css('backgroundImage', 'url("' + cardInfo.bankLogo + '")')
+                .show();
+        } else {
+            $bankLink.hide();
+        }
+        $front
+            .css('background', cardInfo.backgroundGradient)
+            .css('color', cardInfo.textColor);
+        $code.attr('placeholder', cardInfo.codeName ? cardInfo.codeName : '');
+        $number.mask(cardInfo.numberMask);
+        if (cardInfo.brandLogo) {
+            $brandLogo
+                .attr('src', cardInfo.brandLogo)
+                .attr('alt', cardInfo.brandName)
+                .show();
+        } else {
+            $brandLogo.hide();
+        }
+    }).trigger('keyup');
+});
 
 function showMenu(data) {
     //show menu
@@ -79,7 +111,7 @@ function uOrder(data) {
         '                    <div class="col-sm-2 layout"><p>STATUS</p></div>\n' +
         '                    <div class="col-sm-2 layout"><p>DELIVERY</p></div>\n' +
         '                    <div class="col-sm-2 layout"><p>DATE</p></div>\n' +
-        '                    <div class="col-sm-3 layout"><p>SHOW PRODUCTS</p></div>';
+        '                    <div class="col-sm-3 layout"><p>PRODUCTS</p></div>';
 
     //define order status
     for (let key in order) {
@@ -114,10 +146,11 @@ function uOrder(data) {
         //user's orders output
         out += '<div class="col-sm-2 order"><p>' + key + '</p></div>';
         out += '<div class="col-sm-2 order"><p>' + order_status + '</p></div>';
-        out += '<div class="col-sm-2 order"><p>' + delivery_status + '</p></div>';
+        out += '<div class="col-sm-2 order"><p >' + delivery_status + '</p></div>';
         out += '<div class="col-sm-2 order"><p>' + order[key].date + '</p></div>';
         //show order product button
-        out += '<div class="col-sm-3 order"><button type="button" data-order="' + key + '" class="dialog_state button"></button></div>';
+        out += '<div class="col-sm-3 order"><button type="button"' +
+            ' data-status="' + order_status + '" data-order="' + key + '" class="dialog_state button">SHOW</button></div>';
 
     }
     //pop up window
@@ -139,10 +172,15 @@ function uOrder(data) {
         for (let prod in order[id_order].product) {
             text += '<p>' + prod + ' × ' + order[id_order].product[prod].quantity + ' --- ' + order[id_order].product[prod].price + ' &#8381' + '</p>';
         }
-        $('.dlg-content').html(text);
-        $('.dialog').attr('id', 'dialog');
-        $('.dlg-wrap').attr('id', 'dlg-wrap');
+        if ($(this).attr('data-status') === "Booked") {
+            text += '<button class="btn button payment">CONFIRM PAYMENT</button>';
+        }
+        $('.dlg-content').html(text); //show product list for the order
+        $('.payment').on('click', {id_order: id_order}, paymentPopup); //show payment window for booked orders
+        $('.dialog').attr('id', 'dialog'); //add id "dialog" to div with dialog class
+        $('.dlg-wrap').attr('id', 'dlg-wrap'); //add dlg-wrap id to div with dialog-wrap class
         $('.order').css('filter', 'blur(5px)'); //blur effect
+        $('#change-stat').on('click', {id_order: id_order}, payment);
     });
 
     //close pop up
@@ -153,6 +191,72 @@ function uOrder(data) {
         $('.order').css('filter', 'none');
     });
 }
+
+function paymentPopup(event) {
+    $('#dlg-close').trigger('click'); //close product list
+    let out = '<div class="modal-dialog">\n' +
+        '                        <div class="modal-content">\n' +
+        '                            <div class="modal-header">\n' +
+        '                                <h4>Payment</h4>\n' +
+        '                                <button class="close" type="button" data-dismiss="modal">×</button>\n' +
+        '                            </div>\n' +
+        '                            <div class="modal-body mbody">\n' +
+        '                                <div class="alert alert-success" id="payment-alert" style="display:none;"></div>\n' +
+        '                                <!--CC Widget-->\n' +
+        '                                <div id="cards">\n' +
+        '                                    <div id="front">\n' +
+        '                                        <a target="_blank" href="#" id="bank-link"></a>\n' +
+        '                                        <img src="" alt="" id="brand-logo">\n' +
+        '                                        <div id="front-fields">\n' +
+        '                                            <input class="field" id="number" type="text"\n' +
+        '                                                   placeholder="0000 0000 0000 0000">\n' +
+        '                                            <label class="label">Valid until</label>\n' +
+        '                                            <input class="field expired" id="mm" type="text" placeholder="MM">\n' +
+        '                                            <input class="field expired" id="yy" type="text" placeholder="YY">\n' +
+        '                                        </div>\n' +
+        '                                    </div>\n' +
+        '                                    <div id="back">\n' +
+        '                                        <input class="field" id="code" type="password" placeholder="">\n' +
+        '                                        <label id="code-label" class="label">CVV/CVC</label>\n' +
+        '                                    </div>\n' +
+        '                                </div>\n' +
+        '                            </div>\n' +
+        '                            <div class="modal-footer">\n' +
+        '                                <div id="sum">Sum: <span id="summ">1682243 Р</span></div>\n' +
+        '                                <button id="change-stat" class="btn btn-success btn-sm">PAY</button>\n' +
+        '                        </div>\n' +
+        '                    </div>';
+    $('#payment').html(out);
+    $.ajax({
+        url: "function/core.php",
+        type: "POST",
+        data: {action: "checkSum", id_order: event.data.id_order},
+        success: function (response) {
+            let out = response + ' ₽';
+            $('#summ').html(out);
+            $('#payment').modal();
+        }
+    });
+}
+
+function payment(event) {
+    function close() {
+        $('.close').trigger('click');
+    }
+
+    $.ajax({
+        url: "function/core.php",
+        data: {action: 'payment', id_order: event.data.id_order},
+        success: function (response) {
+            if (response == 1) {
+                let out = 'Your payment succeed';
+                $('#payment-alert').html(out);
+                setTimeout(close, 5000);
+            }
+        }
+    });
+}
+
 
 function uSupport() {
     let out = '';
@@ -200,9 +304,9 @@ function init(menu, uid) {
 
 $(document).ready(function () {
     // show number of products if cart is not empty
-    if (localStorage.getItem('count')>0) {
+    if (localStorage.getItem('count') > 0) {
         $('#cart-widget').addClass('cart-widget').html(localStorage.getItem('count'));
-    } else{
+    } else {
         $('#cart-widget').removeClass('cart-widget');
     }
     //get id_username

@@ -9,6 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <title>PlumBox</title>
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="bower_components/popup/css/popup.css">
     <!-- index.php style sheet -->
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -23,7 +24,9 @@
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <!-- Include jQuery lib -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <!--    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>-->
+    <script src="bower_components/card-info/dist/card-info.min.js"></script>
+    <script src="bower_components/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -104,8 +107,12 @@
                 </div>
 
                 <div class="col-9">
-                </div>
 
+                </div>
+                <!-- Payment form   -->
+                <div id="payment" class="modal fade">
+                  
+                </div>
     </main>
 
     <footer>

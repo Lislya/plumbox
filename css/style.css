@@ -70,6 +70,7 @@ nav {
 }
 
 .navbar {
+    padding: 0;
     display: flex;
     justify-content: space-between;
 }
@@ -91,7 +92,7 @@ nav {
 
 .navbar-center {
     font-size: 17px;
-
+    height: 23px;
     margin-top: 40px;
     padding-left: 120px;
 
@@ -102,7 +103,6 @@ nav {
     padding: 14px 20px;
 
     text-align: center;
-
     color: #000;
 }
 
@@ -117,7 +117,7 @@ nav {
 
 .navbar-right {
     font-size: 14px;
-
+    height: 37px;
     display: flex;
 
     margin-top: 26px;
@@ -286,10 +286,6 @@ nav {
     margin-top: 20px;
 }
 
-.buy-book-btn{
-    display: flex;
-    width: 63%;
-}
 
 .promocode {
     margin-bottom: 0;
@@ -330,12 +326,18 @@ nav {
     margin-bottom: 2px;
 }
 
+.buy-book-btn{
+    display: flex;
+    width: 63%;
+    margin-left: 48px;
+}
+
 .book-btn,
 .buy-btn {
+    cursor: pointer;
     width: 50% !important;
     height: 52px;
     margin-top: 10px;
-    /*margin-left: 184px;*/
 
     text-align: center;
 
@@ -382,6 +384,37 @@ nav {
 
     height: 4em;
 }
+
+.payment{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: .5em;
+    font-size: 15px;
+}
+
+#payment{
+    top: 12%;
+    left: 38%;
+    width: 450px;
+}
+
+#sum{
+    margin-right: auto;
+    font-family: 'Lato',sans-serif;
+    font-size: 1.1em;
+    font-weight: 300;
+}
+
+.delivery{
+    cursor: pointer;
+}
+
+.mbody{
+    padding-left: auto;
+    padding-right: auto;
+}
+
 
 /*style for user's personal data*/
 .personal-container {

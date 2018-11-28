@@ -25,13 +25,23 @@ switch ($action) {
         getShop();
         break;
     case 'promoCheck':
-        if (isset($_REQUEST['promo'])){
+        if (isset($_REQUEST['promo'])) {
             promoCheck($_REQUEST['promo']);
         }
         break;
+    case 'quantityCheck':
+        if (isset($_REQUEST['order'])) {
+            quantityCheck($_REQUEST['order']);
+        }
+        break;
     case 'bookProd':
-        if (isset($_REQUEST['order'])){
+        if (isset($_REQUEST['order'])) {
             bookProd($_REQUEST['order']);
+        }
+        break;
+    case 'checkOut':
+        if (isset($_REQUEST['order'])) {
+            checkOut($_REQUEST['order']);
         }
         break;
     case 'uPersonal':
@@ -40,15 +50,25 @@ switch ($action) {
         }
         break;
     case 'uOrder':
-        if (isset($_REQUEST['uid'])){
+        if (isset($_REQUEST['uid'])) {
             getOrder($_REQUEST['uid']);
         }
         break;
     case 'uSettings':
         break;
     case 'uSupport':
-        if (isset($_REQUEST['data'])){
+        if (isset($_REQUEST['data'])) {
             sendMessage($_REQUEST['data']);
+        }
+        break;
+    case 'checkSum':
+        if (isset($_REQUEST['id_order'])) {
+            checkSum($_REQUEST['id_order']);
+        }
+        break;
+    case 'payment':
+        if (isset($_REQUEST['id_order'])){
+            payment($_REQUEST['id_order']);
         }
         break;
 }
