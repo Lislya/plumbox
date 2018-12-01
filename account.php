@@ -111,7 +111,7 @@
                 </div>
                 <!-- Payment form   -->
                 <div id="payment" class="modal fade">
-                  
+
                 </div>
     </main>
 

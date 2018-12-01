@@ -1,7 +1,7 @@
 var uid = '';
 var menu = '';
 
-$(function () {
+function creditCardValid(){
     //Credit Card Widget
     var $front = $('#front'); // front side of the CC
     var $bankLink = $('#bank-link'); // backside of the CC
@@ -32,7 +32,8 @@ $(function () {
             $brandLogo.hide();
         }
     }).trigger('keyup');
-});
+
+}
 
 function showMenu(data) {
     //show menu
@@ -180,8 +181,8 @@ function uOrder(data) {
         $('.dialog').attr('id', 'dialog'); //add id "dialog" to div with dialog class
         $('.dlg-wrap').attr('id', 'dlg-wrap'); //add dlg-wrap id to div with dialog-wrap class
         $('.order').css('filter', 'blur(5px)'); //blur effect
-        $('#change-stat').on('click', {id_order: id_order}, payment);
     });
+
 
     //close pop up
     $('#dlg-close').on('click', function () {
@@ -227,6 +228,7 @@ function paymentPopup(event) {
         '                        </div>\n' +
         '                    </div>';
     $('#payment').html(out);
+    creditCardValid();
     $.ajax({
         url: "function/core.php",
         type: "POST",
@@ -237,11 +239,13 @@ function paymentPopup(event) {
             $('#payment').modal();
         }
     });
+    $('#change-stat').on('click', {id_order: event.data.id_order}, payment);
 }
 
 function payment(event) {
     function close() {
-        $('.close').trigger('click');
+        $('.close').trigger('click'); //close payment window
+        $('li:eq(1)').trigger('click'); //reload order page
     }
 
     $.ajax({
@@ -250,7 +254,7 @@ function payment(event) {
         success: function (response) {
             if (response == 1) {
                 let out = 'Your payment succeed';
-                $('#payment-alert').html(out);
+                $('#payment-alert').html(out).css('display','block');
                 setTimeout(close, 5000);
             }
         }
