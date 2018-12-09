@@ -1,6 +1,7 @@
 <?php
 $action = $_REQUEST['action'];
 require_once('functions.php');
+include_once('adminfunction.php');
 
 switch ($action) {
     case 'category':
@@ -67,8 +68,24 @@ switch ($action) {
         }
         break;
     case 'payment':
-        if (isset($_REQUEST['id_order'])){
+        if (isset($_REQUEST['id_order'])) {
             payment($_REQUEST['id_order']);
         }
         break;
+    case 'uManageOrder':
+        manageOrder();
+        break;
+    case 'getCategory':
+        getCategory();
+        break;
+    case 'getUpdateProductList':
+        if (isset($_REQUEST['category_id'])) {
+            getUPL($_REQUEST['category_id']);
+        }
+        break;
+    case 'showUpdateInfo':
+        if (isset($_REQUEST['id_prod'])) {
+            showUpdateInfo($_REQUEST['id_prod']);
+            break;
+        }
 }

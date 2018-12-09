@@ -34,18 +34,18 @@
     line-height: 20px;
 
     -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     width: 100%;
     margin-bottom: 10px;
     padding: 13px 13px 13px 54px;
 
     color: #3c3c3c;
-    border: 3px solid rgba(0,0,0,0);
+    border: 3px solid rgba(0, 0, 0, 0);
     border-radius: 0;
     background-color: #fbfbfb;
 
-        -ms-box-sizing: border-box;
+    -ms-box-sizing: border-box;
 }
 
 .feedback-input:focus {
@@ -64,8 +64,6 @@
 }
 
 /* Icons ---------------------------------- */
-
-
 
 #comment {
     background-image: url(http://rexkirby.com/kirbyandson/images/comment.svg);
@@ -103,8 +101,8 @@ textarea:focus {
 
     cursor: pointer;
     -webkit-transition: all .3s;
-       -moz-transition: all .3s;
-            transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
 
     color: white;
     border: #fbfbfb solid 4px;
@@ -113,7 +111,7 @@ textarea:focus {
 
 #button-blue:hover {
     color: #000;
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .submit:hover {
@@ -125,10 +123,10 @@ textarea:focus {
     height: 50px;
 
     -webkit-transition: .3s ease;
-       -moz-transition: .3s ease;
-        -ms-transition: .3s ease;
-         -o-transition: .3s ease;
-            transition: .3s ease;
+    -moz-transition: .3s ease;
+    -ms-transition: .3s ease;
+    -o-transition: .3s ease;
+    transition: .3s ease;
 
     background-color: #fbfbfb;
 }
@@ -139,3 +137,315 @@ textarea:focus {
     background-color: white;
 }
 
+.col-9 {
+    margin-bottom: 25px;
+}
+
+.loading {
+    position: absolute;
+    height: 100%;
+    width: 80%;
+    background: #fff;
+    z-index: 11;
+    animation: fadeout 0.5s forwards 1s;
+}
+
+.item {
+    float: left;
+    overflow: hidden;
+    position: absolute;
+}
+
+.inner {
+    margin: auto;
+    height: 90%;
+    width: 90%;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    animation: fadein 0.5s forwards 2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading > .inner {
+    opacity: 1;
+}
+
+.loading > .inner > .ellipsis::after {
+    content: '.';
+    font-size: 1em;
+    color: transparent;
+    animation: ellipsis .75s steps(3) 5;
+}
+
+.inner p {
+    font-size: xx-large;
+    position: relative;
+    width: auto;
+    margin: auto 10px;
+    text-align: center;
+}
+
+.borders {
+    background: #333;
+    position: absolute;
+    transition: all 0.2s ease;
+}
+
+/* Items */
+.item:nth-child(2) {
+    z-index: 10;
+    background: #c7c1c1;
+    width: 50%;
+    height: 50%;
+    left: 8%;
+    max-width: 44%;
+    animation: slidein1 0.5s ease-in-out 1s;
+    animation-fill-mode: both;
+}
+
+.item:nth-child(3) {
+    z-index: 9;
+    background: #d1c6c6;
+    /*right:0;*/
+    width: 40%;
+    left: 52%;
+    min-height: 100%;
+    animation: slidein2 1.4s forwards 3s;
+    animation-fill-mode: both;
+}
+
+.item:nth-child(4) {
+    z-index: 8;
+    left: 8%;
+    bottom: 0;
+    background: #857a7a;
+    width: 50%;
+    height: 50%;
+    max-width: 22%;
+    animation: slidein3 0.5s ease-in-out 1.5s;
+    animation-fill-mode: both;
+}
+
+.item:nth-child(5) {
+    z-index: 7;
+    left: 30%;
+    top: 50%;
+    background: #b3b3b3;
+    width: 22%;
+    height: 25%;
+    animation: slidein4 0.5s ease-in-out 2s;
+    animation-fill-mode: both;
+}
+
+.item:nth-child(6) {
+    z-index: 6;
+    left: 30%;
+    bottom: 0;
+    background: #c2a1a1;
+    width: 22%;
+    height: 25%;
+}
+
+/* Animations */
+/* "Authentic Motion" */
+@keyframes slidein1 {
+    0% {
+        min-height: 100%;
+    }
+    100% {
+        min-height: 50%;
+    }
+}
+
+@keyframes slidein2 {
+    0% {
+        min-height: 0;
+    }
+    100% {
+        height: 50%;
+    }
+}
+
+@keyframes slidein3 {
+    0% {
+        max-width: 44%;
+    }
+    100% {
+        max-width: 22%;
+    }
+}
+
+@keyframes slidein4 {
+    0% {
+        height: 50%;
+    }
+    100% {
+        height: 25%;
+    }
+}
+
+@keyframes slidein5 {
+    0% {
+        width: 25%;
+    }
+    100% {
+        width: 12.5%;
+    }
+}
+
+@keyframes fadeout {
+    0% {
+        opacity: 1;
+        background: #fff;
+    }
+    50% {
+        background: #fff;
+    }
+    /* Fade lighter: #00897B */
+    99% {
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+    }
+    100% {
+        height: 0;
+        width: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes ellipsis {
+    0% {
+        color: transparent;
+        text-shadow: none;
+    }
+    1% {
+        color: #333;
+        text-shadow: .5em 0 0 transparent, 1em 0 0 transparent;
+    }
+    26% {
+        color: black;
+        text-shadow: .5em 0 0 transparent, 1em 0 0 transparent;
+    }
+    51% {
+        color: black;
+        text-shadow: .5em 0 0 black, 1em 0 0 transparent;
+    }
+    76% {
+        color: black;
+        text-shadow: .5em 0 0 black, 1em 0 0 black;
+    }
+    100% {
+        color: black;
+        text-shadow: .5em 0 0 black, 1em 0 0 black;
+    }
+}
+
+#administrator {
+    animation: none;
+    height: 50%;
+}
+
+/* Border Animation */
+.item:hover {
+    filter: brightness(70%);
+    transition: 0.5s;
+}
+
+/* Added Material Button */
+.circle {
+    display: block;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.075);
+    border-radius: 50%;
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+}
+
+.circle.animate {
+    -webkit-animation: effect 0.65s linear;
+    animation: effect 0.65s linear;
+}
+
+@-webkit-keyframes effect {
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(2.5);
+        transform: scale(2.5);
+    }
+}
+
+@keyframes effect {
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(2.5);
+        transform: scale(2.5);
+    }
+}
+
+.product-control-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 307px;
+    height: 462px;
+    margin: 10px;
+}
+
+.nav-link {
+    font-size: 13px;
+}
+
+.nav-link:not(.active) {
+    color: #fff;
+}
+
+.icon-card-img {
+    margin: auto;
+    width: 120px;
+    height: 120px;
+    margin-top: 10px;
+}
+.card-image{
+    text-align: center;
+}
+.filename{
+    font-size: 12px;
+}
+#file-list{
+    max-height: 38px;
+    overflow: auto;
+}
+.custom-file{
+    height: 30px;
+    font-size: 12px;
+    text-align: left;
+}
+.form-control-file{
+    height: 30px;
+}
+.add-btn{
+    width: 100%;
+}
+.file-add{
+    height: 54px;
+}

@@ -296,6 +296,10 @@ function checkOut() {
                         out = 'Your order is processed! Check your email (' + $("#email").val() + ') for more information';
                         $('#checkAlert').html(out).css('display', 'block').removeClass('alert-danger').addClass('alert-success');
                         setTimeout(cartReset, 5000, '#checkAlert');
+                    } else if (e==0){
+                        out = "Checkout Error!";
+                        $('#checkAlert').html(out).css('display','block').removeClass('alert-success').addClass('alert-danger');
+                        setTimeout(cartReset,5000,'#checkAlert');
                     }
                 }
             });

@@ -549,17 +549,39 @@ function checkSum($id_order) {
     for ($i = 0; $i < count($product_list); $i++) {
         $sum += $quantity_list[$i] * $price_list[$i];
     }
-    $sum = ceil($sum*(1-$discount));
+    $sum = ceil($sum * (1 - $discount));
     echo $sum;
 }
 
-function payment($id_order){
-    //change order status to "Shipped" in account.php after payment
+function payment($id_order) {
     $conn = connect();
+    $product_list = array(); //list of products in order
+    $quantity_list = array(); //number of booked products
+    //change booked num and quantity num after payment in account.php
+    $sql = "SElECT id_product, quantity FROM order_product WHERE id_order = '$id_order'";
+    if ($result_set = $conn->query($sql)) {
+        while ($rows = $result_set->fetch_assoc()) {
+            $product_list[] = $rows['id_product'];
+            $quantity_list[] = $rows['quantity'];
+        }
+    }
+    $result_set->free();
+
+    for ($i = 0; $i < count($product_list); $i++) {
+        $sql = "UPDATE product SET booked = booked-'$quantity_list[$i]',quantity = quantity-'$quantity_list[$i]' WHERE id_product = '$product_list[$i]'";
+        if (!$result = $conn->query($sql)) {
+            echo "Updating product table error: " . $conn->error;
+            die;
+        }
+    }
+
+
+    //change order status to "Shipped" in account.php after payment
     $sql = "UPDATE `order` SET order_stat=1 WHERE id_order='$id_order'";
-    if (!$result = $conn->query($sql)){
-        echo 0;
-    } else echo 1; //success
+    if (!$result = $conn->query($sql)) {
+        echo "Error:" . $conn->error;
+        die;
+    } else echo 1;
 }
 
 function sendMessage($message) {

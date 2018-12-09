@@ -1,7 +1,6 @@
 <!-- Connect to DB -->
 <?php require_once('function/connect.php') ?>
 <?php if (empty($_SESSION['username'])) {
-    echo $_SESSION['username'];
     die ("<h1>Authorized Access Only! <a href='login.php'>Login here</a></h1>");
 } ?>
 <!DOCTYPE html>
@@ -12,25 +11,29 @@
 
     <link rel="stylesheet" type="text/css" href="bower_components/popup/css/popup.css">
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/1.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/chosen_v1.8.7/chosen.css">
 
     <!-- index.php style sheet -->
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/catalog.css">
+    <link rel="stylesheet" type="text/css" href="css/1.css">
     <!-- Include Raleway font -->
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <!-- Include Bootstrap-icon pack for social -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-grid.min.css">
-    <!--    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">-->
 
 
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <!-- Include jQuery lib -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <!--    <script src="bower_components/popup/js/popup.js"></script>-->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
+    <!-- Include Google Charts -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!--    chosen lib  -->
+    <script type="text/javascript" src="bower_components/chosen_v1.8.7/chosen.jquery.js"></script>
 </head>
 <body>
 <header>
@@ -65,90 +68,192 @@
 </header>
 
 <main>
-    <main>
-        <!--        Main cart       -->
-        <div class="alert alert-success" role="alert" id="bookProd" style="display: none    ;"></div>
-        <div class="cart"></div>
-        <!--            Pop-up window with customer information input   -->
-        <div id="order" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="spincrement"></h4><h4>&nbsp;₽</h4>
-                        <button class="close" type="button" data-dismiss="modal">×</button>
-                    </div>
-                    <div class="modal-body ">
-                        <form method="POST" action="function/checkout.php">
-                            <div class="form-item">
-                                <input type="email" name="email" id="email" class="signup-input" required>
-                                <div class="alert alert-danger" role="alert" id="alert_email"
-                                     style="display: none;"></div>
-                                <label for="email" class="signup-label">Email</label>
-                                <!--CC Widget-->
-                                <div id="cards">
-                                    <div id="front">
-                                        <a target="_blank" href="#" id="bank-link"></a>
-                                        <img src="" alt="" id="brand-logo">
-                                        <div id="front-fields">
-                                            <input class="field" id="number" type="text"
-                                                   placeholder="0000 0000 0000 0000">
-                                            <label class="label">Valid until</label>
-                                            <input class="field expired" id="mm" type="text" placeholder="MM">
-                                            <input class="field expired" id="yy" type="text" placeholder="YY">
-                                        </div>
-                                    </div>
-                                    <div id="back">
-                                        <input class="field" id="code" type="password" placeholder="">
-                                        <label id="code-label" class="label">CVV/CVC</label>
-                                    </div>
-                                </div>
-                            </div>
+    <?php
+    switch ($_SESSION['role']) {
+        case 0:
+            echo '<div class="container">
+            <div class="row">
+                <!-- left navbar of account -->
+                <div class="col-sm">
+                    <ul class="catalog">
+                        <!-- uPersonal means User Personal data -->
+                        <li data-option="uPersonal">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/user_icon.png" alt="">
+								</span>
+                                <span class="title">Personal Information</span>
+                            </a>
+                        </li>
+                        <li data-option="uOrder">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/order_icon.png" alt="">
+								</span>
+                                <span class="title">My Orders</span>
+                            </a>
+                        </li>
+                        <li data-option="uControl">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/manage_icon.png" alt="">
+								</span>
+                                <span class="title">Admin panel</span>
+                            </a>
+                        </li>
+                        <li data-option="uStatistic">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/statistic_icon.png" alt="">
+								</span>
+                                <span class="title">Statistic</span>
+                            </a>
+                        </li>
 
-                            <div class="checkbox">
-                                <label for="addr_stat">Delivery address?</label>
+                    </ul>
+                </div>';
+            break;
+        case 1:
+            echo '<div class="container">
+            <div class="row">
+                <!-- left navbar of account -->
+                <div class="col-sm">
+                    <ul class="catalog">
+                        <!-- uPersonal means User Personal data -->
+                        <li data-option="uPersonal">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/user_icon.png" alt="">
+								</span>
+                                <span class="title">Personal Information</span>
+                            </a>
+                        </li>
+                        <li data-option="uOrder">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/order_icon.png" alt="">
+								</span>
+                                <span class="title">My Orders</span>
+                            </a>
+                        </li>
+                        <li data-option="uStatistic">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/statistic_icon.png" alt="">
+								</span>
+                                <span class="title">Shop Statistic</span>
+                            </a>
+                        </li>
+                        <li data-option="uSupport">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/support_icon.png" alt="">
+								</span>
+                                <span class="title">Help & Support</span>
+                            </a>
+                        </li>
 
-                                <input type="checkbox" id="addr_stat" name="addr_stat" value="on"
-                                       onclick="ShowHide(this)">
+                    </ul>
+                </div>';
+            break;
+        case 2:
+            echo '<div class="container">
+            <div class="row">
+                <!-- left navbar of account -->
+                <div class="col-sm">
+                    <ul class="catalog">
+                        <!-- uPersonal means User Personal data -->
+                        <li data-option="uPersonal">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/user_icon.png" alt="">
+								</span>
+                                <span class="title">Personal Information</span>
+                            </a>
+                        </li>
+                        <li data-option="uOrder">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/order_icon.png" alt="">
+								</span>
+                                <span class="title">My Orders</span>
+                            </a>
+                        </li>
+                        <li data-option="uControl">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/manage_icon.png" alt="">
+								</span>
+                                <span class="title">Shop control panel</span>
+                            </a>
+                        </li>
+                        <li data-option="uSupport">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/support_icon.png" alt="">
+								</span>
+                                <span class="title">Help & Support</span>
+                            </a>
+                        </li>
 
-                                <select class="form-control" id="pickup">
+                    </ul>
+                </div>';
+            break;
+        case 3:
+            echo '<div class="container">
+            <div class="row">
+                <!-- left navbar of account -->
+                <div class="col-sm">
+                    <ul class="catalog">
+                        <!-- uPersonal means User Personal data -->
+                        <li data-option="uPersonal">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/user_icon.png" alt="">
+								</span>
+                                <span class="title">Personal Information</span>
+                            </a>
+                        </li>
+                        <li data-option="uOrder">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/order_icon.png" alt="">
+								</span>
+                                <span class="title">My Orders</span>
+                            </a>
+                        </li>
+                        <li data-option="uSettings">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/settings_icon.png" alt="">
+								</span>
+                                <span class="title">Settings</span>
+                            </a>
+                        </li>
+                        <li data-option="uSupport">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/support_icon.png" alt="">
+								</span>
+                                <span class="title">Help & Support</span>
+                            </a>
+                        </li>
 
-                                </select>
-                            </div>
-                            <div class="addr_input" id="addr_input">
-                                <div class="form-item_addr">
-                                    <input type="text" name="region" id="region" class="signup-input"
-                                           placeholder="Region">
-                                </div>
-                                <div class="form-item_addr">
-                                    <input type="text" name="city" id="city" class="signup-input" placeholder="City">
-                                </div>
-                                <div class="form-item_addr">
-                                    <input type="text" name="street" id="street" class="signup-input"
-                                           placeholder="Street">
-                                </div>
-                                <div class="form-item_addr">
-                                    <input type="text" name="house" id="house" class="signup-input" placeholder="House">
-                                </div>
-                                <div class="form-item_addr">
-                                    <input type="text" name="corp" id="corp" class="signup-input" placeholder="Corp">
-                                </div>
-                                <div class="form-item_addr">
-                                    <input type="text" name="flat" id="flat" class="signup-input" placeholder="Flat">
-                                </div>
-                                <div class="form-item_addr">
-                                    <input type="text" name="post_index" id="post_index" class="signup-input"
-                                           placeholder="Post Index">
-                                </div>
+                    </ul>
+                </div>';
+            break;
+    }
+    ?>
+    <div class="col-9">
+        <script></script>
+    </div>
 
-                            </div>
-                            <div class="modal-footer">
-                                <input class="btn btn-success" type="submit" value="CHECKOUT">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-    </main>
+    </div>
+    <!-- Payment form   -->
+    <div id="payment" class="modal fade">
+
+    </div>
+</main>
 
 <footer>
     <!-- Social -->
@@ -167,8 +272,8 @@
     </div>
 </footer>
 
-<script src="js/cart.js"></script>
-<script src="js/signup.js"></script>
+<script src="js/account.js"></script>
+<script src="js/1.js"></script>
 
 </body>
 </html>

@@ -11,6 +11,7 @@
     <title>PlumBox</title>
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="bower_components/popup/css/popup.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/chosen_v1.8.7/chosen.min.css">
     <!-- index.php style sheet -->
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/catalog.css">
@@ -24,9 +25,15 @@
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <!-- Include jQuery lib -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Include Card Info Lib -->
     <script src="bower_components/card-info/dist/card-info.min.js"></script>
     <script src="bower_components/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
+    <!-- Include bootstrap js for modal windows -->
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Include Google Charts  -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!--    Include Chosen Lib -->
+    <script type="text/javascript" src="bower_components/chosen_v1.8.7/chosen.jquery.min.js"></script>
 
 </head>
 <body>
@@ -63,8 +70,155 @@
     </header>
 
     <main>
-        <!-- grid setting -->
-        <div class="container">
+        <?php
+        switch ($_SESSION['role']) {
+            case 0:
+                echo '<div class="container">
+            <div class="row">
+                <!-- left navbar of account -->
+                <div class="col-sm">
+                    <ul class="catalog">
+                        <!-- uPersonal means User Personal data -->
+                        <li data-option="uPersonal">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/user_icon.png" alt="">
+								</span>
+                                <span class="title">Personal Information</span>
+                            </a>
+                        </li>
+                        <li data-option="uOrder">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/order_icon.png" alt="">
+								</span>
+                                <span class="title">My Orders</span>
+                            </a>
+                        </li>
+                        <li data-option="uManageOrder">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/order_management_icon.png" alt="">
+								</span>
+                                <span class="title">Order Management</span>
+                            </a>
+                        </li>
+                        <li data-option="uManageStaff">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/add_seller_icon.png" alt="">
+								</span>
+                                <span class="title">Staff Management</span>
+                            </a>
+                        </li>
+                        <li data-option="uManageProduct">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/add_product_icon.png" alt="">
+								</span>
+                                <span class="title">Product Control</span>
+                            </a>
+                        </li>
+                        <li data-option="uStatistic">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/statistic_icon.png" alt="">
+								</span>
+                                <span class="title">Statistic</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>';
+                break;
+            case 1:
+                echo '<div class="container">
+            <div class="row">
+                <!-- left navbar of account -->
+                <div class="col-sm">
+                    <ul class="catalog">
+                        <!-- uPersonal means User Personal data -->
+                        <li data-option="uPersonal">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/user_icon.png" alt="">
+								</span>
+                                <span class="title">Personal Information</span>
+                            </a>
+                        </li>
+                        <li data-option="uOrder">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/order_icon.png" alt="">
+								</span>
+                                <span class="title">My Orders</span>
+                            </a>
+                        </li>
+                        <li data-option="uStatistic">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/statistic_icon.png" alt="">
+								</span>
+                                <span class="title">Shop Statistic</span>
+                            </a>
+                        </li>
+                        <li data-option="uSupport">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/support_icon.png" alt="">
+								</span>
+                                <span class="title">Help & Support</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>';
+                break;
+            case 2:
+                echo '<div class="container">
+            <div class="row">
+                <!-- left navbar of account -->
+                <div class="col-sm">
+                    <ul class="catalog">
+                        <!-- uPersonal means User Personal data -->
+                        <li data-option="uPersonal">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/user_icon.png" alt="">
+								</span>
+                                <span class="title">Personal Information</span>
+                            </a>
+                        </li>
+                        <li data-option="uOrder">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/order_icon.png" alt="">
+								</span>
+                                <span class="title">My Orders</span>
+                            </a>
+                        </li>
+                        <li data-option="uControl">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/manage_icon.png" alt="">
+								</span>
+                                <span class="title">Shop control panel</span>
+                            </a>
+                        </li>
+                        <li data-option="uSupport">
+                            <a class="catalog_item">
+								<span class="icon">
+									<img src="img/icon/support_icon.png" alt="">
+								</span>
+                                <span class="title">Help & Support</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>';
+                break;
+            case 3:
+                echo '<div class="container">
             <div class="row">
                 <!-- left navbar of account -->
                 <div class="col-sm">
@@ -104,15 +258,29 @@
                         </li>
 
                     </ul>
-                </div>
+                </div>';
+                break;
+        }
+        ?>
 
-                <div class="col-9">
+        <div id="hidden" style="display: none;"></div>
+        <div class="col-9">
+            <div class="start-text">
+                <img src="http://x-lines.ru/letters/i/cyrillicscript/0034/000000/20/0/k71saa5xpi11y7dxrbhs67m1rbosga5xqiz8eee.png"
+                     alt="Welcome to your account">
+            </div>
+            <div class="start-text">
+                <img src="http://x-lines.ru/letters/i/cyrillicscript/0034/000000/20/0/epwg655ucwog65ufrbzscedwpb1zg3e.png"
+                     alt="Choose one of these">
+            </div>
+            <div class="start-text">
+                <img src="img/icon/menu_arrow_icon.png" alt="">
+            </div>
+        </div>
+        <!-- Payment form   -->
+        <div id="payment" class="modal fade">
 
-                </div>
-                <!-- Payment form   -->
-                <div id="payment" class="modal fade">
-
-                </div>
+        </div>
     </main>
 
     <footer>
