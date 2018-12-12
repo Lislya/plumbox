@@ -18,6 +18,5 @@
   },
   "_source": "https://github.com/igorescobar/jQuery-Mask-Plugin.git",
   "_target": "^1.14.15",
-  "_originalSource": "jquery.mask.min",
-  "_direct": true
+  "_originalSource": "jquery.mask.min"
 }

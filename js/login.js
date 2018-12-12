@@ -4,4 +4,4 @@ $(document).ready(function () {
     } else{
         $('#cart-widget').removeClass('cart-widget');
     }
-})
+});

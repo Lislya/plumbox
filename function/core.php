@@ -86,6 +86,60 @@ switch ($action) {
     case 'showUpdateInfo':
         if (isset($_REQUEST['id_prod'])) {
             showUpdateInfo($_REQUEST['id_prod']);
-            break;
         }
+        break;
+    case 'getStaffList':
+        if (isset($_REQUEST['id_role'])){
+            getStaffList($_REQUEST['id_role']);
+        }
+        break;
+    case 'showStaffInfo':
+        if (isset($_REQUEST['uid'])){
+            showStaffInfo($_REQUEST['uid']);
+        }
+        break;
+    case 'productDistribution':
+        productDistribution();
+        break;
+    case 'companyPerformance':
+        companyPerformance();
+        break;
+    case 'topProduct':
+        topProduct();
+        break;
+    case 'removeProd':
+        if (isset($_REQUEST['id_product'])){
+            removeProd($_REQUEST['id_product']);
+        }
+        break;
+    case 'updateProd':
+        if (isset($_REQUEST['product'])){
+            updateProd($_REQUEST['product']);
+        }
+        break;
+    case 'updateOrderStatus':
+        if (isset($_REQUEST['list'])){
+            updateOrderStatus($_REQUEST['list']);
+        }
+        break;
+    case 'updateStaff':
+        if (isset($_REQUEST['staff'])){
+            updateStaff($_REQUEST['staff']);
+        }
+        break;
+    case 'removeStaff':
+        if (isset($_REQUEST['email'])){
+            removeStaff($_REQUEST['email']);
+        }
+        break;
+    case 'addStaff':
+        if (isset($_REQUEST['staff'])){
+            addStaff($_REQUEST['staff']);
+        }
+        break;
+    case 'addProd':
+        if (isset($_REQUEST['product'])){
+            addProd($_REQUEST['product']);
+        }
+        break;
 }

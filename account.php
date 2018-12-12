@@ -30,11 +30,13 @@
     <script src="bower_components/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
     <!-- Include bootstrap js for modal windows -->
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Include Google Charts  -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <!--    Include Chosen Lib -->
     <script type="text/javascript" src="bower_components/chosen_v1.8.7/chosen.jquery.min.js"></script>
-
+    <!--    Include Flip Lib    -->
+    <script type="text/javascript" src="bower_components/flip/dist/jquery.flip.min.js"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -301,6 +303,7 @@
     </footer>
 </div>
 <script src="js/account.js"></script>
+<script src="js/signup.js"></script>
 
 </body>
 </html>

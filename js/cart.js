@@ -120,7 +120,7 @@ function showCart(data) {
                     $('.minus-btn').on('click', minusProd); //decrease product num
                     $('#btn-buy').on('click', showPopup); // show instant order checkout window
                     $('#btn-book').on('click', bookProd); //book products
-                    $('#checkout-btn').on('click', checkOut);
+
                     $(".spincrement").spincrement({
                         from: 0,                // Стартовое число
                         to: cartSum,            // Итоговое число. Если false, то число будет браться из элемента с классом spincrement, также сюда можно напрямую прописать число. При этом оно может быть, как целым, так и с плавающей запятой
@@ -360,4 +360,5 @@ function promoCheck() {
 
 $(document).ready(function () {
     loadCart();
+    $('#checkout-btn').on('click', checkOut);
 });

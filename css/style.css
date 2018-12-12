@@ -697,6 +697,47 @@ textarea:focus {
     left: 1%;
 }
 
+#top-product{
+    height: 400px;
+    width: 345px;
+}
+
+#card-chart{
+    width: auto;
+    height: auto;
+}
+#body-statistic{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.top-list{
+    height: auto;
+}
+#top-list>.inner{
+    flex-wrap: wrap;
+}
+#top-list  img{
+    margin-top: auto;
+}
+
+.top-prod-name{
+    font-size: 12px;
+}
+
+#backside,#seller-backside,#top-product:hover{
+    filter: none !important;
+}
+
+#card-statistic{
+    margin: auto;
+    height: 100%;
+    width: 100%;
+}
+#card-statistic >.card-header > h5{
+    margin-bottom: 0;
+}
+
 .col-9 {
     margin-bottom: 25px;
 }
@@ -704,7 +745,7 @@ textarea:focus {
 .loading {
     position: absolute;
     height: 100%;
-    width: 80%;
+    width: 100%;
     background: #fff;
     z-index: 11;
     animation: fadeout 0.5s forwards 1s;
@@ -775,6 +816,7 @@ textarea:focus {
     background: #d1c6c6;
     /*right:0;*/
     width: 40%;
+
     left: 52%;
     min-height: 100%;
     animation: slidein2 1.4s forwards 3s;
@@ -805,13 +847,22 @@ textarea:focus {
 }
 
 .item:nth-child(6) {
-    z-index: 6;
-    left: 30%;
-    bottom: 0;
-    background: #c2a1a1;
-    width: 22%;
-    height: 25%;
+    /*z-index: 6;*/
+    background: transparent;
+    /*right:0;*/
+    /*width: 40%;*/
+    left: 52%;
+    min-height: 100%;
 }
+.item:nth-child(7){
+    background: transparent;
+    width: 50%;
+    height: 50%;
+    left: -32%;
+    max-width: 44%;
+    position: relative;
+}
+
 
 #barchart > .inner {
     flex-wrap: wrap;
@@ -855,7 +906,7 @@ textarea:focus {
         height: 50%;
     }
     100% {
-        height: 25%;
+        height: 50%;
     }
 }
 
@@ -1035,6 +1086,20 @@ textarea:focus {
     font-size: 14px;
 }
 
+/*card-staff*/
+.card-staff{
+    height: 400px;
+    width: 343px;
+    margin: auto;
+}
+.card-optional{
+    width: 380px;
+    height: 200px;
+    margin: auto;
+}
+.optional-header{
+    height: 50px;
+}
 /*footer style*/
 
 footer {
